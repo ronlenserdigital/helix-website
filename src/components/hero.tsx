@@ -12,8 +12,14 @@ export default function Hero() {
       <div className="grid-fade" aria-hidden="true" />
 
       {/* Helix stage: full-bleed on desktop, sits behind copy */}
-      <div className="absolute inset-y-0 right-0 w-full lg:w-[72%] opacity-70 lg:opacity-90 pointer-events-none" aria-hidden="true">
-        <div className="absolute inset-0 bg-gradient-to-r from-bg via-bg/60 to-transparent lg:from-bg lg:via-bg/30 lg:to-transparent" />
+      <div
+        className="absolute inset-y-0 right-0 w-full lg:w-[72%] opacity-60 lg:opacity-90 pointer-events-none"
+        style={{
+          maskImage: "linear-gradient(90deg, transparent 0%, black 38%, black 100%)",
+          WebkitMaskImage: "linear-gradient(90deg, transparent 0%, black 38%, black 100%)",
+        }}
+        aria-hidden="true"
+      >
         <HelixCanvas />
       </div>
 
