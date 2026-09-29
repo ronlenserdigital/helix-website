@@ -1,0 +1,34 @@
+[
+  {
+    "q": "What do you actually build?",
+    "a": "AI agents that do a specific job in your business: answer quote requests, chase reorders and open quotes, answer the phone and chat. Underneath them, GoHighLevel systems and custom software when you need it. We build with AI tools, we ship fast, and you own everything."
+  },
+  {
+    "q": "Why would this work when other automation did not?",
+    "a": "Because we start with one workflow, connect it to your real catalog and CRM, and tune it for 30 days after launch with your team. Most failed automations were generic chatbots with no data and nobody watching."
+  },
+  {
+    "q": "What if the agent does not know the answer?",
+    "a": "It says so and hands off to a person with the full context attached. It never invents a price or a spec. You decide what it may answer, what needs approval, and when it must stop."
+  },
+  {
+    "q": "How much does it cost?",
+    "a": "A free 30 minute call first. Then a fixed price in writing for the build, no hourly billing. Some agents run on a monthly plan that covers hosting, minutes, and tuning. Nothing is owed monthly unless you choose that."
+  },
+  {
+    "q": "How long does it take?",
+    "a": "Receptionist 2 to 3 weeks. Reorder follow-up 2 to 4. Quote desk 3 to 5. Custom apps 3 to 8. We give you the date before you pay."
+  },
+  {
+    "q": "Who owns the code, the data, and the accounts?",
+    "a": "You do. The GoHighLevel sub-account, the repo, the domain, the integrations. If we disappeared tomorrow, everything keeps running and your team has the runbook."
+  },
+  {
+    "q": "Do we need GoHighLevel?",
+    "a": "No, but it is the fastest way to get pipelines, follow-up, and reporting in one place. If you already have HubSpot or Zoho, we can build on that or migrate you."
+  },
+  {
+    "q": "Is our data safe?",
+    "a": "Agents only get access to what the job needs. No patient data, no card numbers. Everything runs in your accounts, not ours. We document what connects to what."
+  }
+]

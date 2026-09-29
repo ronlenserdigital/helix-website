@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Ron Lenser",
+    "role": "Co-founder, sales and systems",
+    "credentials": [
+      "Building client sites, tools, and automations with AI since 2025",
+      "Runs the Helix lead engine: scraping, grading, GoHighLevel",
+      "Makes the calls, closes the deals, owns the relationship"
+    ],
+    "linkedin": "https://linkedin.com/in/ronlenser",
+    "email": "ron@helixresearchtech.com",
+    "photo": "/founders/ron.svg"
+  },
+  {
+    "name": "Martin Shurtleff",
+    "role": "Co-founder, product and engineering",
+    "credentials": [
+      "TODO credential 1",
+      "TODO credential 2",
+      "TODO credential 3"
+    ],
+    "linkedin": "TODO",
+    "email": "martin@helixresearchtech.com",
+    "photo": "/founders/martin.svg"
+  },
+  {
+    "name": "TODO Third Founder",
+    "role": "Co-founder, TODO",
+    "credentials": [
+      "TODO credential 1",
+      "TODO credential 2",
+      "TODO credential 3"
+    ],
+    "linkedin": "TODO",
+    "email": "",
+    "photo": "/founders/steen.svg"
+  }
+]
