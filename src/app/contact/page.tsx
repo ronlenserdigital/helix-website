@@ -48,11 +48,11 @@ export default async function ContactPage(props: PageProps<"/contact">) {
                 loading="lazy"
               />
             ) : (
-              <div className="h-full min-h-[520px] rounded-2xl border border-dashed border-line-2 grid place-items-center text-center p-8">
+              <div className="h-full min-h-[520px] rounded-2xl border border-dashed border-gray-300 grid place-items-center text-center p-8">
                 <div>
                   <p className="eyebrow mb-3">Calendar</p>
-                  <p className="text-fg-2 max-w-sm">
-                    Booking calendar loads here once <span className="mono text-fg">NEXT_PUBLIC_GHL_CALENDAR_URL</span> is set. Until then, use the form or email a founder.
+                  <p className="text-gray-600 max-w-sm">
+                    Booking calendar loads here once <span className="mono text-navy">NEXT_PUBLIC_GHL_CALENDAR_URL</span> is set. Until then, use the form or email a founder.
                   </p>
                 </div>
               </div>
@@ -63,28 +63,28 @@ export default async function ContactPage(props: PageProps<"/contact">) {
             {!sent ? <LeadForm variant="page" title="Or send the details first" /> : null}
             <div className="glass p-7 reveal">
               <p className="eyebrow mb-4">On the call</p>
-              <ul className="space-y-2.5 text-fg-2">
+              <ul className="space-y-2.5 text-gray-600">
                 {[
                   "How quotes, orders, and follow-ups move through your business today",
                   "Which agent would pay for itself first, and roughly what it costs",
                   "A written scope and fixed price within two business days, if it fits",
                 ].map((t) => (
                   <li key={t} className="flex gap-3">
-                    <Check width={18} height={18} className="text-teal mt-0.5 flex-none" /> <span>{t}</span>
+                    <Check width={18} height={18} className="text-blue mt-0.5 flex-none" /> <span>{t}</span>
                   </li>
                 ))}
               </ul>
               <div className="hairline my-6" />
-              <div className="flex flex-col gap-2 text-sm text-fg-2">
-                <a href={`mailto:${SITE.email}`} className="inline-flex items-center gap-2 hover:text-fg">
+              <div className="flex flex-col gap-2 text-sm text-gray-600">
+                <a href={`mailto:${SITE.email}`} className="inline-flex items-center gap-2 hover:text-navy">
                   <Mail width={16} height={16} /> {SITE.email}
                 </a>
                 {!isTodo(SITE.phone) ? (
-                  <a href={`tel:${SITE.phone}`} className="inline-flex items-center gap-2 hover:text-fg">
+                  <a href={`tel:${SITE.phone}`} className="inline-flex items-center gap-2 hover:text-navy">
                     <Phone width={16} height={16} /> {SITE.phoneDisplay}
                   </a>
                 ) : null}
-                <span className="text-fg-3">{SITE.hours}. {SITE.responseTime}.</span>
+                <span className="text-gray-500">{SITE.hours}. {SITE.responseTime}.</span>
               </div>
             </div>
           </div>

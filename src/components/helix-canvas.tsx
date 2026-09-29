@@ -99,10 +99,10 @@ export default function HelixCanvas({ className = "" }: { className?: string }) 
         const a = nodes[i];
         const b = nodes[NODES + i];
         const depth = (a.z + b.z) / (2 * radius); // -1..1
-        const alpha = 0.12 + (depth + 1) * 0.16;
+        const alpha = 0.18 + (depth + 1) * 0.2;
         const grad = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
-        grad.addColorStop(0, `rgba(127,216,240,${alpha})`);
-        grad.addColorStop(1, `rgba(185,174,245,${alpha})`);
+        grad.addColorStop(0, `rgba(14,28,45,${alpha})`);
+        grad.addColorStop(1, `rgba(21,102,185,${alpha})`);
         ctx.strokeStyle = grad;
         ctx.lineWidth = 1 + (depth + 1) * 0.6;
         ctx.beginPath();
@@ -120,8 +120,8 @@ export default function HelixCanvas({ className = "" }: { className?: string }) 
           if (i === 0) ctx.moveTo(p.x, p.y);
           else ctx.lineTo(p.x, p.y);
         }
-        ctx.strokeStyle = s === 0 ? "rgba(127,216,240,0.35)" : "rgba(185,174,245,0.35)";
-        ctx.lineWidth = 1.2;
+        ctx.strokeStyle = s === 0 ? "rgba(14,28,45,0.55)" : "rgba(21,102,185,0.55)";
+        ctx.lineWidth = 1.8;
         ctx.stroke();
       }
 
@@ -131,9 +131,8 @@ export default function HelixCanvas({ className = "" }: { className?: string }) 
         const depth = (n.z / radius + 1) / 2; // 0..1
         const r = 1.6 + depth * 3.4;
         const a = 0.25 + depth * 0.75;
-        const color = n.strand === 0 ? `rgba(127,216,240,${a})` : `rgba(185,174,245,${a})`;
-        ctx.shadowBlur = 10 + depth * 18;
-        ctx.shadowColor = n.strand === 0 ? "rgba(127,216,240,0.9)" : "rgba(139,124,240,0.9)";
+        const color = n.strand === 0 ? `rgba(14,28,45,${a})` : (n.i % 3 === 0 ? `rgba(245,207,69,${a})` : `rgba(21,102,185,${a})`);
+        ctx.shadowBlur = 0;
         ctx.fillStyle = color;
         ctx.beginPath();
         ctx.arc(n.x, n.y, r, 0, Math.PI * 2);

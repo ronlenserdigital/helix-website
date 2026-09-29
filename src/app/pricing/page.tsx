@@ -41,13 +41,13 @@ export default function PricingPage() {
               <div key={s.name} className={`glass p-7 reveal reveal-delay-${i + 1}`}>
                 <span className="num">{s.timeline}</span>
                 <h3 className="h3 mt-3">{s.name}</h3>
-                <p className="mt-3 text-fg-2 leading-relaxed">{s.example}</p>
+                <p className="mt-3 text-gray-600 leading-relaxed">{s.example}</p>
               </div>
             ))}
           </div>
           <div className="mt-10 glass p-8 reveal">
             <h3 className="h3">What is never on the invoice</h3>
-            <ul className="mt-4 grid sm:grid-cols-2 gap-x-8 gap-y-2 text-fg-2">
+            <ul className="mt-4 grid sm:grid-cols-2 gap-x-8 gap-y-2 text-gray-600">
               <li>Hourly billing</li>
               <li>Per-seat fees</li>
               <li>Markup on your GoHighLevel, Twilio, or hosting accounts</li>

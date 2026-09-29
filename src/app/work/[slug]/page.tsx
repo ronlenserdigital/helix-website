@@ -44,7 +44,7 @@ export default async function CasePage(props: PageProps<"/work/[slug]">) {
         cta={false}
       >
         {placeholder ? (
-          <p className="mt-6 inline-flex items-center gap-2 text-xs text-amber border border-amber/30 rounded-full px-3 py-1.5">
+          <p className="mt-6 inline-flex items-center gap-2 text-xs text-red border border-red/40 rounded-full px-3 py-1.5">
             Target outcome. A named case study replaces this page once the client approves publication.
           </p>
         ) : null}
@@ -56,11 +56,11 @@ export default async function CasePage(props: PageProps<"/work/[slug]">) {
             <div className="grid sm:grid-cols-2 gap-4">
               {c.metrics.map((m) => (
                 <div key={m.label} className="glass p-6 reveal">
-                  <p className="text-xs text-fg-3 uppercase tracking-wider">{m.label}</p>
+                  <p className="text-xs text-gray-500 uppercase tracking-wider">{m.label}</p>
                   <div className="mt-3 flex items-baseline gap-3">
-                    <span className="text-fg-3 line-through text-xl">{m.before}</span>
-                    <ArrowRight width={16} height={16} className="text-fg-3" />
-                    <span className="text-4xl font-semibold text-teal tracking-tight">{m.after}</span>
+                    <span className="text-gray-500 line-through text-xl">{m.before}</span>
+                    <ArrowRight width={16} height={16} className="text-gray-500" />
+                    <span className="text-4xl font-semibold text-blue tracking-tight">{m.after}</span>
                   </div>
                 </div>
               ))}
@@ -69,8 +69,8 @@ export default async function CasePage(props: PageProps<"/work/[slug]">) {
               <div className="glass p-8 reveal">
                 <p className="eyebrow mb-3">Built with</p>
                 <h2 className="h3">{svc.name}</h2>
-                <p className="mt-3 text-fg-2">{svc.outcome}</p>
-                <Link href={`/services/${svc.slug}`} className="mt-5 inline-flex items-center gap-2 text-teal">
+                <p className="mt-3 text-gray-600">{svc.outcome}</p>
+                <Link href={`/services/${svc.slug}`} className="mt-5 inline-flex items-center gap-2 text-blue">
                   How the {svc.name} works <ArrowUpRight width={16} height={16} />
                 </Link>
               </div>

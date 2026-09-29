@@ -29,7 +29,7 @@ export default function AboutPage() {
         lead="The person on your first call builds your system and picks up when it breaks. We started Helix because supply companies were losing orders to slow replies, and the agencies pitching them AI could not ship."
       />
       <Founders full />
-      <section className="section bg-bg-2/50 border-y border-line">
+      <section className="section bg-white/50 border-y border-gray-200">
         <div className="container">
           <SectionHeading eyebrow="How we work" title={<>Four things we <Em>will not compromise.</Em></>} />
           <div className="mt-10 grid gap-4 md:grid-cols-2">
@@ -37,7 +37,7 @@ export default function AboutPage() {
               <div key={b.t} className={`glass p-7 reveal reveal-delay-${(i % 4) + 1}`}>
                 <span className="num">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="h3 mt-3">{b.t}</h3>
-                <p className="mt-3 text-fg-2 leading-relaxed">{b.d}</p>
+                <p className="mt-3 text-gray-600 leading-relaxed">{b.d}</p>
               </div>
             ))}
           </div>

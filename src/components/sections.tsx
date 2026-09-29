@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SITE, SERVICES, CASES, FOUNDERS, BADGES, FAQ, PRICING, COMPARE, isTodo } from "@/lib/data";
-import { ArrowRight, ArrowUpRight, Check, Minus, X, ServiceIcon, Linkedin, Clock, Shield, Bolt } from "./icons";
+import { ArrowRight, ArrowUpRight, Check, Minus, X, ServiceIcon, Linkedin } from "./icons";
+import { IconChat, IconClock, IconGears, IconBulb, IconTarget, IconPeople, IconTag, IconQuestion, Sparkles, CurlArrow, Doodle, Bolt, Arc } from "./doodles";
 
 /* ---------- Shared bits ---------- */
 
@@ -10,16 +11,21 @@ export function SectionHeading({
   title,
   lead,
   align = "left",
+  icon,
 }: {
   eyebrow?: string;
   title: React.ReactNode;
   lead?: string;
   align?: "left" | "center";
+  icon?: React.ReactNode;
 }) {
   return (
     <div className={`reveal max-w-3xl ${align === "center" ? "mx-auto text-center" : ""}`}>
       {eyebrow ? <p className="eyebrow mb-4">{eyebrow}</p> : null}
-      <h2 className="h2">{title}</h2>
+      <h2 className={`h2 ${icon ? "kicker-title" : ""} ${align === "center" ? "justify-center" : ""}`}>
+        {icon}
+        <span>{title}</span>
+      </h2>
       {lead ? <p className="lead mt-5">{lead}</p> : null}
     </div>
   );
@@ -34,18 +40,14 @@ export function Em({ children }: { children: React.ReactNode }) {
 export function TrustStrip() {
   const items = [...BADGES, ...BADGES];
   return (
-    <section aria-label="Tools we build with" className="relative py-10 border-y border-line bg-bg-2/60">
-      <div className="container mb-5 flex items-center justify-between gap-4">
-        <p className="eyebrow">Built on tools you already trust</p>
-        <p className="text-xs text-fg-3 hidden sm:block">Every account is opened in your name.</p>
-      </div>
+    <section aria-label="Tools we build with" className="relative py-10">
+      <p className="eyebrow text-center mb-6">Built on tools your team already trusts</p>
       <div className="marquee">
         <div className="marquee-track">
           {items.map((b, i) => (
             <div key={b.name + i} className="flex items-center gap-3 whitespace-nowrap">
-              <span className="w-2 h-2 rounded-full bg-teal/70" />
-              <span className="font-semibold tracking-tight text-fg">{b.name}</span>
-              <span className="text-fg-3 text-sm">{b.note}</span>
+              <span className="font-display font-bold text-navy text-xl tracking-tight">{b.name}</span>
+              <span className="text-gray-500 text-sm">{b.note}</span>
             </div>
           ))}
         </div>
@@ -58,12 +60,12 @@ export function TrustStrip() {
 
 export function Stats() {
   return (
-    <section className="container py-12">
+    <section className="container py-8">
       <dl className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {SITE.stats.map((s, i) => (
-          <div key={s.label} className={`glass p-6 reveal reveal-delay-${i + 1} flex flex-col-reverse gap-2`}>
-            <dt className="text-fg-3 text-sm">{s.label}</dt>
-            <dd className="text-4xl font-semibold tracking-tight">{s.value}</dd>
+          <div key={s.label} className={`card p-6 reveal reveal-delay-${i + 1} flex flex-col-reverse gap-2`}>
+            <dt className="text-gray-600 text-sm">{s.label}</dt>
+            <dd className="font-display font-bold text-4xl text-navy tracking-tight">{s.value}</dd>
           </div>
         ))}
       </dl>
@@ -75,32 +77,34 @@ export function Stats() {
 
 export function Problem() {
   const pains = [
-    { t: "The 4:47pm quote", d: "A buyer sends a part number and a quantity. It sits in a shared inbox until tomorrow. By then they have three other prices.", icon: Clock },
-    { t: "The quiet reorder", d: "A good account reorders every 6 weeks. Week 7 goes by. Nobody noticed, so they ordered from the rep who texted back.", icon: Bolt },
-    { t: "The lunch-hour voicemail", d: "Peak call time is when your team is busiest. Voicemail is where orders go to die.", icon: Shield },
+    { t: "The 4:47pm quote", d: "A buyer sends a part number and a quantity. It sits in a shared inbox until tomorrow. By then they have three other prices.", icon: IconClock, spot: "hatch-red" },
+    { t: "The quiet reorder", d: "A good account reorders every 6 weeks. Week 7 goes by. Nobody noticed, so they ordered from the rep who texted back.", icon: IconTag, spot: "hatch-yellow" },
+    { t: "The lunch-hour voicemail", d: "Peak call time is when your team is busiest. Voicemail is where orders go to die.", icon: IconChat, spot: "blob-teal" },
   ];
   return (
     <section className="section">
+      <Doodle style={{ right: "5%", top: 40 }}>
+        <Sparkles />
+      </Doodle>
       <div className="container">
         <SectionHeading
-          eyebrow="The leak"
+          icon={<IconTarget />}
           title={
             <>
-              Supply companies do not lose deals on price.
-              <br />
-              They lose them on <Em>hours.</Em>
+              Supply companies do not lose deals on price. They lose them on <Em>hours.</Em>
             </>
           }
           lead="Every one of these is a small delay that costs a real order. An agent closes the gap without adding headcount."
         />
         <div className="mt-12 grid gap-4 md:grid-cols-3">
           {pains.map((p, i) => (
-            <div key={p.t} className={`glass glass-hover p-7 reveal reveal-delay-${i + 1}`}>
-              <div className="w-11 h-11 rounded-2xl grid place-items-center bg-teal/10 text-teal ring-1 ring-teal/30">
+            <div key={p.t} className={`card glass-hover p-7 reveal reveal-delay-${i + 1} relative overflow-hidden`}>
+              <span className={`${p.spot} absolute -right-6 -top-6 w-24 h-24`} aria-hidden="true" />
+              <div className="relative text-navy">
                 <p.icon />
               </div>
               <h3 className="h3 mt-6">{p.t}</h3>
-              <p className="mt-3 text-fg-2 leading-relaxed">{p.d}</p>
+              <p className="mt-3 text-gray-600 leading-relaxed">{p.d}</p>
             </div>
           ))}
         </div>
@@ -118,56 +122,52 @@ export function ServicesGrid({ compact = false }: { compact?: boolean }) {
       <div className="container">
         {!compact ? (
           <SectionHeading
-            eyebrow="What we build"
+            icon={<IconGears />}
             title={
               <>
-                Agents named by the job
-                <br />
-                they <Em>actually do.</Em>
+                Agents named by the job they <Em>actually do.</Em>
               </>
             }
             lead="Not chatbots. Agents with access to your catalog, your CRM, and your calendar, doing one job end to end."
           />
         ) : null}
         <div className={`${compact ? "" : "mt-12"} grid gap-4 lg:grid-cols-3`}>
-          <Link
-            href={`/services/${flagship.slug}`}
-            className="glass glass-hover p-8 lg:row-span-2 flex flex-col reveal ring-glow"
-          >
+          <Link href={`/services/${flagship.slug}`} className="card-navy glass-hover p-8 lg:row-span-2 flex flex-col reveal relative overflow-hidden">
+            <span className="halftone-light absolute -right-10 -bottom-10 w-44 h-44 opacity-50" aria-hidden="true" />
             <div className="flex items-center justify-between">
-              <span className="eyebrow">{flagship.eyebrow}</span>
-              <span className="num">{flagship.timeline}</span>
+              <span className="eyebrow !text-blue-300">{flagship.eyebrow}</span>
+              <span className="num !text-gray-300">{flagship.timeline}</span>
             </div>
-            <div className="w-12 h-12 mt-8 rounded-2xl grid place-items-center bg-teal/10 text-teal ring-1 ring-teal/30">
+            <div className="w-12 h-12 mt-8 rounded-xl grid place-items-center bg-cream text-navy">
               <ServiceIcon name={flagship.icon} width={22} height={22} />
             </div>
-            <h3 className="h2 mt-6" style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)" }}>
+            <h3 className="font-display font-bold text-cream mt-6" style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)", lineHeight: 1.05, letterSpacing: "-0.02em" }}>
               {flagship.name}
             </h3>
-            <p className="mt-4 text-fg-2 leading-relaxed text-lg">{flagship.short}</p>
-            <ul className="mt-6 space-y-2.5 text-fg-2">
+            <p className="mt-4 text-gray-300 leading-relaxed text-lg">{flagship.short}</p>
+            <ul className="mt-6 space-y-2.5 text-gray-300">
               {flagship.bullets.slice(0, 4).map((b) => (
                 <li key={b} className="flex gap-3">
-                  <Check className="text-teal mt-0.5 flex-none" width={18} height={18} /> <span>{b}</span>
+                  <Check className="text-yellow mt-0.5 flex-none" width={18} height={18} /> <span>{b}</span>
                 </li>
               ))}
             </ul>
-            <span className="mt-auto pt-8 inline-flex items-center gap-2 text-teal font-medium">
+            <span className="mt-auto pt-8 inline-flex items-center gap-2 text-cream font-display font-semibold">
               See how it works <ArrowUpRight width={16} height={16} />
             </span>
           </Link>
           {rest.map((s, i) => (
-            <Link key={s.slug} href={`/services/${s.slug}`} className={`glass glass-hover p-7 flex flex-col reveal reveal-delay-${(i % 3) + 1}`}>
+            <Link key={s.slug} href={`/services/${s.slug}`} className={`card glass-hover p-7 flex flex-col reveal reveal-delay-${(i % 3) + 1}`}>
               <div className="flex items-center justify-between">
                 <span className="eyebrow">{s.eyebrow}</span>
                 <span className="num">{s.timeline}</span>
               </div>
-              <div className="w-11 h-11 mt-6 rounded-2xl grid place-items-center bg-violet/10 text-violet ring-1 ring-violet/30">
+              <div className="w-11 h-11 mt-6 rounded-xl grid place-items-center bg-blue-100 text-blue">
                 <ServiceIcon name={s.icon} width={20} height={20} />
               </div>
               <h3 className="h3 mt-5">{s.name}</h3>
-              <p className="mt-3 text-fg-2 leading-relaxed">{s.short}</p>
-              <span className="mt-auto pt-6 inline-flex items-center gap-2 text-fg-2 text-sm">
+              <p className="mt-3 text-gray-600 leading-relaxed">{s.short}</p>
+              <span className="mt-auto pt-6 link-arrow text-sm">
                 Details <ArrowRight width={16} height={16} />
               </span>
             </Link>
@@ -182,29 +182,43 @@ export function ServicesGrid({ compact = false }: { compact?: boolean }) {
 
 export function Process() {
   const steps = [
-    { n: "01", t: "Audit", d: "One call, then we read how quotes, orders, and follow-ups actually move. You get a written plan with a fixed price and a date.", when: "Week 1" },
-    { n: "02", t: "Build", d: "We connect the agent to your catalog, CRM, calendar, and inbox. You see it working on real requests before launch.", when: "Weeks 2 to 4" },
-    { n: "03", t: "Launch", d: "It goes live on one channel first. Your team keeps every approval it wants. Nothing goes out that you did not sign off on.", when: "Launch day" },
-    { n: "04", t: "Tune", d: "30 days of watching real conversations, fixing edge cases, and widening what the agent may handle on its own.", when: "Days 1 to 30" },
+    { n: "01", t: "Audit", d: "One call, then we read how quotes, orders, and follow-ups actually move. You get a written plan with a fixed price and a date.", when: "Week 1", icon: IconBulb },
+    { n: "02", t: "Build", d: "We connect the agent to your catalog, CRM, calendar, and inbox. You see it working on real requests before launch.", when: "Weeks 2 to 4", icon: IconGears },
+    { n: "03", t: "Launch", d: "It goes live on one channel first. Your team keeps every approval it wants. Nothing goes out that you did not sign off on.", when: "Launch day", icon: IconTarget },
+    { n: "04", t: "Tune", d: "30 days of watching real conversations, fixing edge cases, and widening what the agent may handle on its own.", when: "Days 1 to 30", icon: IconClock },
   ];
   return (
-    <section className="section bg-bg-2/50 border-y border-line">
+    <section className="section">
+      <Doodle style={{ left: "6%", top: 60, transform: "rotate(15deg)" }}>
+        <Bolt />
+      </Doodle>
       <div className="container">
         <SectionHeading
-          eyebrow="How it works"
+          icon={<Sparkles />}
+          align="center"
           title={
             <>
               Four weeks from first call to an agent <Em>doing the work.</Em>
             </>
           }
         />
-        <ol className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <ol className="mt-14 grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-4 relative">
           {steps.map((s, i) => (
-            <li key={s.n} className={`glass p-7 reveal reveal-delay-${i + 1} relative overflow-hidden`}>
-              <span className="absolute -right-3 -top-6 text-[7rem] font-semibold tracking-tighter text-white/[0.035] select-none">{s.n}</span>
-              <span className="num">{s.when}</span>
-              <h3 className="h3 mt-4">{s.t}</h3>
-              <p className="mt-3 text-fg-2 leading-relaxed">{s.d}</p>
+            <li key={s.n} className={`reveal reveal-delay-${i + 1} relative text-center`}>
+              {i < steps.length - 1 ? (
+                <span className="hidden lg:block absolute -right-10 top-4 text-navy opacity-70" aria-hidden="true">
+                  <CurlArrow width={64} style={{ transform: i % 2 ? "scaleY(-1)" : undefined }} />
+                </span>
+              ) : null}
+              <div className="mx-auto w-24 h-24 rounded-full grid place-items-center text-navy relative">
+                <span className={`absolute inset-0 rounded-full ${["hatch-yellow", "halftone", "hatch-red", "blob-teal"][i]} opacity-60`} aria-hidden="true" />
+                <span className="relative">
+                  <s.icon width={44} />
+                </span>
+              </div>
+              <span className="num block mt-5">{s.when}</span>
+              <h3 className="h3 mt-2">{s.t}:</h3>
+              <p className="mt-3 text-gray-600 leading-relaxed text-[0.95rem] max-w-xs mx-auto">{s.d}</p>
             </li>
           ))}
         </ol>
@@ -223,7 +237,7 @@ export function Proof({ limit = 3 }: { limit?: number }) {
       <div className="container">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
           <SectionHeading
-            eyebrow="Results"
+            icon={<IconChat />}
             title={
               <>
                 Before and after, <Em>in numbers.</Em>
@@ -232,27 +246,30 @@ export function Proof({ limit = 3 }: { limit?: number }) {
             lead={hasPlaceholders ? "Target outcomes we build toward on every engagement. Named case studies are published as clients approve them." : undefined}
           />
           <Link href="/work" className="btn btn-ghost self-start lg:self-auto">
-            All results <ArrowRight width={16} height={16} />
+            View All Results
           </Link>
         </div>
         <div className="mt-12 grid gap-4 md:grid-cols-3">
           {items.map((c, i) => (
-            <Link key={c.slug} href={`/work/${c.slug}`} className={`glass glass-hover p-7 flex flex-col reveal reveal-delay-${i + 1}`}>
+            <Link key={c.slug} href={`/work/${c.slug}`} className={`card glass-hover p-7 flex flex-col reveal reveal-delay-${i + 1}`}>
               <span className="eyebrow">{c.client}</span>
-              <span className="text-xs text-fg-3 mt-1">{c.profile}</span>
+              <span className="text-xs text-gray-500 mt-1">{c.profile}</span>
               <h3 className="h3 mt-5">{c.title}</h3>
               <div className="mt-6 grid grid-cols-2 gap-3">
                 {c.metrics.map((m) => (
-                  <div key={m.label} className="rounded-xl border border-line p-3">
+                  <div key={m.label} className="rounded-lg bg-cream border border-gray-200 p-3">
                     <div className="flex items-baseline gap-2">
-                      <span className="text-fg-3 line-through text-sm">{m.before}</span>
-                      <ArrowRight width={12} height={12} className="text-fg-3" />
-                      <span className="text-xl font-semibold text-teal">{m.after}</span>
+                      <span className="text-gray-500 line-through text-sm">{m.before}</span>
+                      <ArrowRight width={12} height={12} className="text-gray-500" />
+                      <span className="font-display font-bold text-xl text-blue">{m.after}</span>
                     </div>
-                    <p className="text-[11px] text-fg-3 mt-1 leading-snug">{m.label}</p>
+                    <p className="text-[11px] text-gray-500 mt-1 leading-snug">{m.label}</p>
                   </div>
                 ))}
               </div>
+              <span className="mt-auto pt-6 link-arrow text-sm">
+                Read <ArrowUpRight width={14} height={14} />
+              </span>
             </Link>
           ))}
         </div>
@@ -269,7 +286,7 @@ export function Founders({ full = false }: { full?: boolean }) {
       <div className="container">
         {!full ? (
           <SectionHeading
-            eyebrow="Who you will talk to"
+            icon={<IconPeople />}
             title={
               <>
                 Three founders. <Em>No account managers.</Em>
@@ -282,43 +299,37 @@ export function Founders({ full = false }: { full?: boolean }) {
           {FOUNDERS.map((f, i) => {
             const todoName = isTodo(f.name);
             return (
-              <div key={f.name + i} className={`glass p-7 reveal reveal-delay-${i + 1}`} id={todoName ? undefined : f.name.toLowerCase().replace(/\s+/g, "-")}>
-                <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-bg-3 to-bg-2 ring-1 ring-line">
+              <div key={f.name + i} className={`card p-6 reveal reveal-delay-${i + 1}`} id={todoName ? undefined : f.name.toLowerCase().replace(/\s+/g, "-")}>
+                <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden bg-cream border border-gray-200">
                   {f.photo.endsWith(".svg") ? (
                     <div className="absolute inset-0 grid place-items-center">
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(127,216,240,0.25),transparent_60%)]" />
-                      <span className="relative text-6xl font-semibold tracking-tight text-fg/80">
+                      <span className={`absolute right-4 top-4 w-16 h-16 ${["hatch-yellow", "halftone", "hatch-red"][i % 3]}`} aria-hidden="true" />
+                      <span className="relative font-display font-bold text-6xl text-navy">
                         {todoName ? "?" : f.name.split(" ").map((n) => n[0]).join("")}
                       </span>
-                      <span className="absolute bottom-4 text-xs text-fg-3">photo coming soon</span>
+                      <span className="absolute bottom-4 text-xs text-gray-500">photo coming soon</span>
                     </div>
                   ) : (
-                    <Image
-                      src={f.photo}
-                      alt={`${f.name}, ${f.role}`}
-                      fill
-                      sizes="(min-width: 768px) 33vw, 100vw"
-                      className="object-cover"
-                    />
+                    <Image src={f.photo} alt={`${f.name}, ${f.role}`} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
                   )}
                 </div>
                 <h3 className="h3 mt-6">{todoName ? "Founder" : f.name}</h3>
-                <p className="text-fg-3 text-sm mt-1">{isTodo(f.role) ? "Co-founder" : f.role}</p>
-                <ul className="mt-5 space-y-2 text-fg-2 text-sm">
+                <p className="text-gray-500 text-sm mt-1">{isTodo(f.role) ? "Co-founder" : f.role}</p>
+                <ul className="mt-5 space-y-2 text-gray-600 text-sm">
                   {f.credentials.filter((c) => !isTodo(c)).map((c) => (
                     <li key={c} className="flex gap-2.5">
-                      <Check width={16} height={16} className="text-teal mt-0.5 flex-none" /> <span>{c}</span>
+                      <Check width={16} height={16} className="text-blue mt-0.5 flex-none" /> <span>{c}</span>
                     </li>
                   ))}
                 </ul>
                 <div className="mt-6 flex items-center gap-4 text-sm">
                   {!isTodo(f.linkedin) ? (
-                    <a href={f.linkedin} rel="noopener" className="inline-flex items-center gap-1.5 text-fg-2 hover:text-fg">
+                    <a href={f.linkedin} rel="noopener" className="link-arrow">
                       <Linkedin width={16} height={16} /> LinkedIn
                     </a>
                   ) : null}
                   {f.email ? (
-                    <a href={`mailto:${f.email}`} className="text-fg-2 hover:text-fg underline-slide">
+                    <a href={`mailto:${f.email}`} className="text-gray-600 hover:text-navy underline-slide">
                       {f.email}
                     </a>
                   ) : null}
@@ -336,10 +347,10 @@ export function Founders({ full = false }: { full?: boolean }) {
 
 function Cell({ v }: { v: string }) {
   const s = v.toLowerCase();
-  if (s === "yes") return <span className="inline-flex items-center gap-2 text-teal"><Check width={18} height={18} /> Yes</span>;
-  if (s === "no") return <span className="inline-flex items-center gap-2 text-fg-3"><X width={18} height={18} /> No</span>;
-  if (s === "partial" || s === "sometimes") return <span className="inline-flex items-center gap-2 text-amber"><Minus width={18} height={18} /> {v[0].toUpperCase() + v.slice(1)}</span>;
-  return <span>{v}</span>;
+  if (s === "yes") return <span className="inline-flex items-center gap-2 text-blue font-semibold"><Check width={18} height={18} /> Yes</span>;
+  if (s === "no") return <span className="inline-flex items-center gap-2 text-gray-500"><X width={18} height={18} /> No</span>;
+  if (s === "partial" || s === "sometimes") return <span className="inline-flex items-center gap-2 text-navy-3"><Minus width={18} height={18} /> {v[0].toUpperCase() + v.slice(1)}</span>;
+  return <span className="text-navy">{v}</span>;
 }
 
 export function CompareTable({
@@ -355,7 +366,7 @@ export function CompareTable({
 }) {
   const last = columns.length - 1;
   return (
-    <div className="glass p-2 sm:p-4 overflow-x-auto reveal">
+    <div className="card p-2 sm:p-4 overflow-x-auto reveal">
       <table className="cmp min-w-[640px]">
         <caption className="sr-only">{title ?? "Comparison"}</caption>
         <thead>
@@ -371,7 +382,7 @@ export function CompareTable({
         <tbody>
           {rows.map((r) => (
             <tr key={r.label}>
-              <th scope="row" className="!normal-case !tracking-normal !text-fg font-medium">
+              <th scope="row" className="!normal-case !tracking-normal !text-navy !text-[0.95rem]">
                 {r.label}
               </th>
               {r.values.map((v, i) => (
@@ -390,13 +401,15 @@ export function CompareTable({
 export function HomeCompare() {
   return (
     <section className="section">
+      <Doodle style={{ right: "7%", top: 30, transform: "rotate(25deg)" }}>
+        <Arc />
+      </Doodle>
       <div className="container">
         <SectionHeading
-          eyebrow="Chatbot vs agent"
+          icon={<IconQuestion />}
           title={
             <>
-              {COMPARE.home.title.split(".")[0]}.<br />
-              <Em>{COMPARE.home.title.split(".")[1]?.trim()}.</Em>
+              {COMPARE.home.title.split(".")[0]}. <Em>{COMPARE.home.title.split(".")[1]?.trim()}.</Em>
             </>
           }
           lead="Read only is a chatbot. Write access to your systems is an agent. That is the whole difference."
@@ -404,8 +417,8 @@ export function HomeCompare() {
         <div className="mt-12">
           <CompareTable columns={COMPARE.home.columns} rows={COMPARE.home.rows} />
         </div>
-        <p className="mt-4 text-sm text-fg-3">
-          Longer version: <Link href="/compare/chatbot-vs-ai-agent" className="underline-slide text-fg-2">chatbot vs AI agent</Link>.
+        <p className="mt-4 text-sm text-gray-500">
+          Longer version: <Link href="/compare/chatbot-vs-ai-agent" className="link-arrow">chatbot vs AI agent</Link>.
         </p>
       </div>
     </section>
@@ -416,42 +429,41 @@ export function HomeCompare() {
 
 export function PricingCards({ withHeading = true }: { withHeading?: boolean }) {
   return (
-    <section className="section bg-bg-2/50 border-y border-line" id="pricing">
+    <section className="section section-dark" id="pricing">
       <div className="container">
         {withHeading ? (
-          <SectionHeading
-            eyebrow="Pricing"
-            title={
-              <>
-                A number in writing <Em>before we build.</Em>
-              </>
-            }
-            lead={PRICING.intro}
-          />
+          <div className="text-center max-w-2xl mx-auto reveal">
+            <span className="inline-grid place-items-center w-14 h-14 rounded-full border-2 border-cream text-cream mb-6">
+              <IconClock width={30} />
+            </span>
+            <h2 className="h2">Three ways in. One mission: your hours back.</h2>
+            <p className="lead mt-4">{PRICING.intro}</p>
+          </div>
         ) : null}
-        <div className={`${withHeading ? "mt-12" : ""} grid gap-4 md:grid-cols-3`}>
+        <div className={`${withHeading ? "mt-12" : ""} grid gap-5 md:grid-cols-3`}>
           {PRICING.tiers.map((t, i) => {
             const priceTodo = isTodo(t.price);
             return (
-              <div key={t.name} className={`glass p-7 flex flex-col reveal reveal-delay-${i + 1} ${t.featured ? "ring-glow" : ""}`}>
-                {t.featured ? <span className="eyebrow mb-3">Most start here</span> : <span className="eyebrow mb-3 opacity-0">.</span>}
-                <h3 className="h3">{t.name}</h3>
-                <div className="mt-4 flex items-baseline gap-2">
-                  <span className="text-4xl font-semibold tracking-tight">{priceTodo ? "Priced" : t.price}</span>
-                  <span className="text-fg-3 text-sm">{t.unit}</span>
+              <div key={t.name} className={`glass p-8 flex flex-col reveal reveal-delay-${i + 1} ${t.featured ? "ring-glow" : ""}`}>
+                <h3 className="font-display font-bold text-navy text-2xl text-center">
+                  <span className="hand-underline">{t.name}</span>
+                </h3>
+                <p className="mt-7 text-gray-600 leading-relaxed text-center">{t.body}</p>
+                <div className="pill-price mt-8">
+                  {priceTodo ? "Priced" : t.price}
+                  <small>/{t.unit}</small>
                 </div>
-                <p className="mt-4 text-fg-2 leading-relaxed">{t.body}</p>
-                <Link href={t.href} className={`btn ${t.featured ? "btn-primary" : "btn-ghost"} mt-auto justify-center`} style={{ marginTop: "1.75rem" }}>
-                  {t.cta} <ArrowUpRight width={16} height={16} />
+                <Link href={t.href} className="btn btn-ghost mt-4 !bg-white !border-gray-200">
+                  {t.cta}
                 </Link>
               </div>
             );
           })}
         </div>
-        <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm text-fg-2">
+        <ul className="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-gray-300">
           {PRICING.principles.map((p) => (
             <li key={p} className="inline-flex items-center gap-2">
-              <Check width={16} height={16} className="text-teal" /> {p}
+              <Check width={16} height={16} className="text-yellow" /> {p}
             </li>
           ))}
         </ul>
@@ -466,15 +478,15 @@ export function Guarantee() {
   const g = SITE.guarantee;
   if (!g.enabled || isTodo(g.headline)) return null;
   return (
-    <section className="container py-6">
-      <div className="glass p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6 ring-glow reveal">
-        <div className="w-14 h-14 rounded-2xl grid place-items-center bg-teal/10 text-teal ring-1 ring-teal/30 flex-none">
-          <Shield width={26} height={26} />
+    <section className="container py-8">
+      <div className="card p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6 ring-glow reveal">
+        <div className="w-14 h-14 rounded-full grid place-items-center bg-yellow text-navy flex-none">
+          <IconTarget width={30} />
         </div>
         <div>
           <h3 className="h3">{g.headline}</h3>
-          <p className="mt-2 text-fg-2 leading-relaxed">{g.body}</p>
-          <p className="mt-2 text-xs text-fg-3">{g.fine}</p>
+          <p className="mt-2 text-gray-600 leading-relaxed">{g.body}</p>
+          <p className="mt-2 text-xs text-gray-500">{g.fine}</p>
         </div>
       </div>
     </section>
@@ -489,7 +501,7 @@ export function Faq({ items = FAQ, heading = true }: { items?: { q: string; a: s
       <div className="container grid gap-10 lg:grid-cols-[1fr_1.4fr]">
         {heading ? (
           <SectionHeading
-            eyebrow="Questions"
+            icon={<IconQuestion />}
             title={
               <>
                 The things people ask <Em>before they book.</Em>
@@ -499,7 +511,7 @@ export function Faq({ items = FAQ, heading = true }: { items?: { q: string; a: s
         ) : (
           <div />
         )}
-        <div className="divide-y divide-line reveal">
+        <div className="divide-y divide-gray-200 reveal">
           {items.map((f) => (
             <details key={f.q} className="faq">
               <summary>
@@ -523,27 +535,29 @@ export function Faq({ items = FAQ, heading = true }: { items?: { q: string; a: s
 
 export function CtaBand({ title, body }: { title?: React.ReactNode; body?: string }) {
   return (
-    <section className="container pb-20">
-      <div className="relative overflow-hidden rounded-[28px] border border-line p-10 md:p-16 text-center reveal">
-        <div className="aurora" aria-hidden="true" />
-        <div className="grid-fade" aria-hidden="true" />
-        <div className="relative">
-          <h2 className="h2 max-w-3xl mx-auto">
-            {title ?? (
-              <>
-                Find out which agent pays for itself <Em>first.</Em>
-              </>
-            )}
-          </h2>
-          <p className="lead mt-5 max-w-2xl mx-auto">{body ?? SITE.calendarNote}</p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/contact" className="btn btn-primary">
-              Book a free 30 minute call <ArrowUpRight width={16} height={16} />
-            </Link>
-            <Link href="/pricing" className="btn btn-ghost">
-              How pricing works
-            </Link>
-          </div>
+    <section className="container pb-24 pt-8 relative">
+      <Doodle style={{ left: "10%", top: 20 }}>
+        <Sparkles />
+      </Doodle>
+      <Doodle style={{ right: "12%", bottom: 40, transform: "rotate(-20deg)" }}>
+        <Bolt />
+      </Doodle>
+      <div className="relative text-center max-w-3xl mx-auto reveal">
+        <h2 className="h2">
+          {title ?? (
+            <>
+              Find out which agent pays for itself <Em>first.</Em>
+            </>
+          )}
+        </h2>
+        <p className="lead mt-5 max-w-2xl mx-auto">{body ?? SITE.calendarNote}</p>
+        <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+          <Link href="/contact" className="btn btn-primary">
+            Book 30 Minutes Free
+          </Link>
+          <Link href="/pricing" className="btn btn-ghost">
+            How pricing works
+          </Link>
         </div>
       </div>
     </section>

@@ -51,14 +51,14 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
             </div>
             <div className="glass p-8 reveal ring-glow">
               <p className="eyebrow mb-3">What changes</p>
-              <p className="lead text-fg">{s.outcome}</p>
+              <p className="lead text-navy">{s.outcome}</p>
             </div>
             <div className="reveal">
               <h2 className="h3 mb-5">What it does</h2>
               <ul className="space-y-3">
                 {s.bullets.map((b) => (
-                  <li key={b} className="flex gap-3 text-fg-2">
-                    <Check width={18} height={18} className="text-teal mt-0.5 flex-none" /> <span>{b}</span>
+                  <li key={b} className="flex gap-3 text-gray-600">
+                    <Check width={18} height={18} className="text-blue mt-0.5 flex-none" /> <span>{b}</span>
                   </li>
                 ))}
               </ul>
@@ -69,7 +69,7 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
                 {s.deliverables.map((d, i) => (
                   <li key={d} className="glass p-4 flex gap-3 items-start">
                     <span className="num mt-0.5">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="text-fg-2">{d}</span>
+                    <span className="text-gray-600">{d}</span>
                   </li>
                 ))}
               </ol>
@@ -80,7 +80,7 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
             <div className="glass p-6">
               <p className="eyebrow mb-3">Timeline</p>
               <p className="text-2xl font-semibold tracking-tight">{s.timeline}</p>
-              <p className="text-fg-3 text-sm mt-1">from signed scope to live, plus 30 days of tuning</p>
+              <p className="text-gray-500 text-sm mt-1">from signed scope to live, plus 30 days of tuning</p>
             </div>
           </aside>
         </div>
@@ -94,12 +94,12 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {others.map((o) => (
               <Link key={o.slug} href={`/services/${o.slug}`} className="glass glass-hover p-6 flex flex-col reveal">
-                <div className="w-10 h-10 rounded-xl grid place-items-center bg-violet/10 text-violet ring-1 ring-violet/30">
+                <div className="w-10 h-10 rounded-xl grid place-items-center bg-blue-100 text-blue">
                   <ServiceIcon name={o.icon} width={18} height={18} />
                 </div>
                 <h3 className="font-semibold mt-4">{o.name}</h3>
-                <p className="text-sm text-fg-2 mt-2">{o.short}</p>
-                <span className="mt-auto pt-4 text-sm text-fg-3 inline-flex items-center gap-1.5">
+                <p className="text-sm text-gray-600 mt-2">{o.short}</p>
+                <span className="mt-auto pt-4 text-sm text-gray-500 inline-flex items-center gap-1.5">
                   Details <ArrowRight width={14} height={14} />
                 </span>
               </Link>

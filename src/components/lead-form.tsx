@@ -3,7 +3,6 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { SERVICES, PRICING } from "@/lib/data";
-import { ArrowUpRight } from "./icons";
 
 const SOURCES = ["Google", "ChatGPT / Perplexity", "Cold email from Helix", "A call from Helix", "Referral", "LinkedIn", "Other"];
 
@@ -54,7 +53,7 @@ export default function LeadForm({ variant = "hero", title }: Props) {
   const compact = variant === "hero";
 
   return (
-    <form onSubmit={onSubmit} className={`glass p-5 sm:p-6 ${compact ? "" : "p-6 sm:p-8"}`} aria-busy={state === "sending"}>
+    <form onSubmit={onSubmit} className={`card relative p-5 sm:p-6 ${compact ? "" : "p-6 sm:p-8"}`} aria-busy={state === "sending"}>
       <div className="flex items-baseline justify-between gap-4 mb-4">
         <h3 className="h3">{title ?? "Get a fixed-price quote"}</h3>
         <span className="num hidden sm:inline">2 min</span>
@@ -150,16 +149,16 @@ export default function LeadForm({ variant = "hero", title }: Props) {
       </div>
 
       {state === "error" ? (
-        <p role="alert" className="mt-4 text-sm text-amber">
+        <p role="alert" className="mt-4 text-sm text-red">
           {error}. Email us instead: <a className="underline" href="mailto:hello@helixresearchtech.com">hello@helixresearchtech.com</a>
         </p>
       ) : null}
 
       <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-4">
         <button type="submit" className="btn btn-primary justify-center" disabled={state === "sending"}>
-          {state === "sending" ? "Sending..." : "Get my fixed-price quote"} <ArrowUpRight width={16} height={16} />
+          {state === "sending" ? "Sending..." : "Get my fixed-price quote"}
         </button>
-        <span className="text-xs text-fg-3 leading-snug">
+        <span className="text-xs text-gray-500 leading-snug">
           Reply within one business day. No spam, no sequences you did not ask for.
         </span>
       </div>

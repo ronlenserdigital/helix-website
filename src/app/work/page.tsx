@@ -39,21 +39,21 @@ export default function WorkPage() {
                   <span className="eyebrow">{c.client}</span>
                   {svc ? <span className="num">{svc.name}</span> : null}
                 </div>
-                <span className="text-xs text-fg-3 mt-1">{c.profile}</span>
+                <span className="text-xs text-gray-500 mt-1">{c.profile}</span>
                 <h2 className="h3 mt-5">{c.title}</h2>
                 <div className="mt-6 grid grid-cols-2 gap-3">
                   {c.metrics.map((m) => (
-                    <div key={m.label} className="rounded-xl border border-line p-3">
+                    <div key={m.label} className="rounded-xl border border-gray-200 p-3">
                       <div className="flex items-baseline gap-2">
-                        <span className="text-fg-3 line-through text-sm">{m.before}</span>
-                        <ArrowRight width={12} height={12} className="text-fg-3" />
-                        <span className="text-xl font-semibold text-teal">{m.after}</span>
+                        <span className="text-gray-500 line-through text-sm">{m.before}</span>
+                        <ArrowRight width={12} height={12} className="text-gray-500" />
+                        <span className="text-xl font-semibold text-blue">{m.after}</span>
                       </div>
-                      <p className="text-[11px] text-fg-3 mt-1 leading-snug">{m.label}</p>
+                      <p className="text-[11px] text-gray-500 mt-1 leading-snug">{m.label}</p>
                     </div>
                   ))}
                 </div>
-                <span className="mt-auto pt-6 text-sm text-fg-2 inline-flex items-center gap-1.5">
+                <span className="mt-auto pt-6 text-sm text-gray-600 inline-flex items-center gap-1.5">
                   Read <ArrowRight width={14} height={14} />
                 </span>
               </Link>

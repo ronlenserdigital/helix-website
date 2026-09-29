@@ -38,6 +38,25 @@ Then in Vercel: New Project, import the repo, framework Next.js, root `.`, no bu
 
 With no env vars set the site still builds and runs. The form returns ok, logs the lead to the server console, and redirects to /contact. Do not launch like that.
 
+## Design system
+
+Modeled on the xray.tech look: warm cream page, navy type, one blue, navy sections for pricing and footer, hand-drawn doodles, line-art icons, halftone and hatch spots, giant wordmark in the footer.
+
+| Token | Value |
+|-------|-------|
+| Page background | `#fffaf0` (cream), price pills `#feefcf` |
+| Headings | `#0e1c2d` navy, Outfit 700, tight tracking |
+| Body | `#686f76` gray, Figtree |
+| Primary | `#1566b9` blue, hover `#0f4185` |
+| Accents | red `#f55647`, yellow `#f5cf45`, teal `#46c3b4` |
+| Borders | `#e1ded8` |
+| Buttons | 8px radius, 15/24 padding, solid blue or white ghost with blue text |
+| Cards | white, 1px border, 12px radius, no shadow. Cream cards on navy sections |
+
+All tokens are in `src/app/globals.css`. Doodles (bolt, sparkle, arc, curl arrow, halftone, hatch) are in `src/components/doodles.tsx`. The helix hero visual is a 2D canvas in `src/components/helix-canvas.tsx`, navy and blue strokes to match the line-art style.
+
+Next design step: custom character illustrations in the same line-art plus spot-color style (like the XRAY people) for the hero frame, pricing cards, and workshop-style sections. Commission or generate, then drop into `public/illustrations/`.
+
 ## Edit map (copy lives in data, not components)
 
 | Change | File |

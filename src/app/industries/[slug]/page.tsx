@@ -59,22 +59,22 @@ export default async function IndustryPage(props: PageProps<"/industries/[slug]"
                 <p className="eyebrow mb-2">Signal</p>
                 <p className="font-semibold">{s.signal}</p>
                 <div className="hairline my-4" />
-                <p className="eyebrow mb-2 !text-violet">Fix</p>
-                <p className="text-fg-2">{s.fix}</p>
+                <p className="eyebrow mb-2 !text-blue">Fix</p>
+                <p className="text-gray-600">{s.fix}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section bg-bg-2/50 border-y border-line">
+      <section className="section bg-white/50 border-y border-gray-200">
         <div className="container grid gap-10 lg:grid-cols-[1fr_1fr] items-start">
           <div>
             <SectionHeading eyebrow="Use cases" title={<>What an agent does for a {ind.name.toLowerCase()} company, <Em>day one.</Em></>} />
             <ul className="mt-8 space-y-3">
               {ind.useCases.map((u) => (
-                <li key={u} className="flex gap-3 text-fg-2">
-                  <Check width={18} height={18} className="text-teal mt-0.5 flex-none" /> <span>{u}</span>
+                <li key={u} className="flex gap-3 text-gray-600">
+                  <Check width={18} height={18} className="text-blue mt-0.5 flex-none" /> <span>{u}</span>
                 </li>
               ))}
             </ul>
