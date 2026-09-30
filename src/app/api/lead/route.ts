@@ -195,35 +195,47 @@ async function pushToGhl(lead: Lead): Promise<{ ok: boolean; id?: string; opport
 
 /* ---------- Discord ---------- */
 
-async function postToDiscord(lead: Lead, ghl: { id?: string; opportunityId?: string }): Promise<void> {
+async function postToDiscord(lead: Lead, ghl: { id?: string; opportunityId?: string }, siteOrigin: string): Promise<void> {
   const url = process.env.DISCORD_LEAD_WEBHOOK_URL;
   if (!url) return;
   const locationId = process.env.GHL_LOCATION_ID;
   const contactUrl = ghl.id && locationId ? `https://app.gohighlevel.com/v2/location/${locationId}/contacts/detail/${ghl.id}` : undefined;
+  const oppUrl = ghl.opportunityId && locationId ? `https://app.gohighlevel.com/v2/location/${locationId}/opportunities/list` : undefined;
+  const brand = `${siteOrigin}/brand`;
   const field = (name: string, value: string | undefined, inline = true) => ({ name, value: (value || "-").slice(0, 1000), inline });
+  const site = lead.website ? (lead.website.startsWith("http") ? lead.website : `https://${lead.website}`) : undefined;
+  const links = [
+    contactUrl ? `[Open contact in GHL](${contactUrl})` : "",
+    oppUrl ? `[Marketing Pipeline](${oppUrl})` : "",
+    site ? `[Their website](${site})` : "",
+    `[Reply by email](mailto:${lead.email})`,
+  ].filter(Boolean).join("  ·  ");
   await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       username: "Helix Website",
+      avatar_url: `${brand}/avatar.png`,
       allowed_mentions: { parse: [] },
       embeds: [
         {
-          title: `🌐 ${lead.company}`,
-          url: contactUrl,
-          description: lead.message ? lead.message.slice(0, 1500) : undefined,
-          color: 0x0e1c2d,
+          author: { name: "helixresearchtech.com  ·  new lead", icon_url: `${brand}/avatar.png`, url: siteOrigin },
+          title: `${lead.company}${lead.need ? `  ·  ${lead.need}` : ""}`.slice(0, 256),
+          url: contactUrl || siteOrigin,
+          description: [lead.message ? `> ${lead.message.slice(0, 1200).replace(/\n/g, "\n> ")}` : "", "", links].join("\n"),
+          color: 0x1566b9,
+          thumbnail: { url: `${brand}/avatar.png` },
+          image: { url: `${brand}/lead-banner.png` },
           fields: [
             field("Name", lead.name),
             field("Email", lead.email),
             field("Website", lead.website),
-            field("Need", lead.need),
             field("Budget", lead.budget),
             field("Found us via", lead.source),
-            field("Page", lead.page),
-            field("GHL", ghl.id ? (ghl.opportunityId ? "contact + deal opened" : "contact saved") : "not saved"),
+            field("From page", lead.page),
+            field("CRM", ghl.id ? (ghl.opportunityId ? "Contact saved, deal opened in New" : "Contact saved") : "Not saved, check GHL_API_KEY", false),
           ],
-          footer: { text: "website lead" },
+          footer: { text: "Helix Research Technologies  ·  Fredericksburg, VA", icon_url: `${brand}/avatar.png` },
           timestamp: new Date().toISOString(),
         },
       ],
@@ -295,7 +307,8 @@ export async function POST(req: Request) {
   }
 
   const ghl = await pushToGhl(lead).catch((e: Error) => ({ ok: false, error: e.message } as { ok: boolean; id?: string; opportunityId?: string; error?: string }));
-  await Promise.all([postToDiscord(lead, ghl), emailCopy(lead)]);
+  const siteOrigin = process.env.NEXT_PUBLIC_SITE_ORIGIN || new URL(req.url).origin;
+  await Promise.all([postToDiscord(lead, ghl, siteOrigin), emailCopy(lead)]);
 
   console.log(JSON.stringify({ event: "lead", ip, ghl: ghl.ok ? `ok ${ghl.id || ""} ${ghl.opportunityId || ""}`.trim() : ghl.error, lead: { ...lead, message: lead.message?.slice(0, 200) } }));
 
