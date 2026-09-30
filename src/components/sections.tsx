@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { SITE, SERVICES, CASES, FOUNDERS, BADGES, FAQ, PRICING, COMPARE, isTodo } from "@/lib/data";
 import { ArrowRight, ArrowUpRight, Check, Minus, X, ServiceIcon, Linkedin } from "./icons";
-import { IconLeak, IconAgents, IconSteps, IconNumbers, IconTeam, IconCompare, IconQuestion, IconPrice, Strand, Node, Curve, Doodle } from "./doodles";
+import LeadForm from "./lead-form";
 
 /* ---------- Shared bits ---------- */
 
@@ -13,7 +13,6 @@ export function SectionHeading({
   chapter,
   title,
   lead,
-  icon,
   eyebrow,
   align,
 }: {
@@ -29,10 +28,7 @@ export function SectionHeading({
     <div className={`heading-row reveal ${align === "center" ? "!grid-cols-1 text-center" : ""}`}>
       <div>
         {label ? <p className="chapter mb-5">{label}</p> : null}
-        <h2 className="h2 flex items-start gap-4">
-          {icon ? <span className="text-navy mt-1 flex-none hidden sm:inline">{icon}</span> : null}
-          <span>{title}</span>
-        </h2>
+        <h2 className="h2">{title}</h2>
       </div>
       {lead ? <p className="lead lg:pb-1">{lead}</p> : null}
     </div>
@@ -48,18 +44,16 @@ export function Em({ children }: { children: React.ReactNode }) {
 export function TrustStrip() {
   const items = [...BADGES, ...BADGES];
   return (
-    <section aria-label="Tools we build with" className="relative py-8 border-y border-gray-200 bg-white/40">
-      <div className="container flex items-center gap-6 mb-4">
+    <section aria-label="Tools we build with" className="relative py-10 border-y border-gray-200">
+      <div className="container flex items-center justify-between gap-6 mb-5">
         <p className="chapter">Runs on</p>
-        <span className="strand-h flex-1 hidden md:block" aria-hidden="true" />
-        <p className="text-xs text-gray-500 hidden md:block">Accounts opened in your name, never ours.</p>
+        <p className="chapter hidden md:block">Accounts opened in your name, never ours.</p>
       </div>
       <div className="marquee">
         <div className="marquee-track">
           {items.map((b, i) => (
             <div key={b.name + i} className="flex items-center gap-3 whitespace-nowrap">
-              <Node size={14} className="text-navy" />
-              <span className="font-display font-semibold text-navy text-lg tracking-tight">{b.name}</span>
+              <span className="font-display font-semibold text-navy text-xl tracking-tight">{b.name}</span>
               <span className="text-gray-500 text-sm">{b.note}</span>
             </div>
           ))}
@@ -74,10 +68,10 @@ export function TrustStrip() {
 export function Stats() {
   return (
     <section className="container py-10">
-      <dl className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-gray-200 rounded-[10px] overflow-hidden border border-gray-200">
+      <dl className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-gray-200 rounded-[20px] overflow-hidden border border-gray-200">
         {SITE.stats.map((s, i) => (
           <div key={s.label} className={`bg-white p-6 reveal reveal-delay-${i + 1}`}>
-            <dd className="font-display font-bold text-4xl text-navy tracking-tight">{s.value}</dd>
+            <dd className="font-display font-semibold text-4xl text-navy tracking-tight">{s.value}</dd>
             <dt className="text-gray-600 text-sm mt-1">{s.label}</dt>
           </div>
         ))}
@@ -96,11 +90,9 @@ export function Problem() {
   ];
   return (
     <section className="section">
-      <span className="rungs-blue absolute left-[8%] top-16 w-28 h-3 hidden lg:block" aria-hidden="true" />
       <div className="container">
         <SectionHeading
-          chapter="01 / Where the money leaks"
-          icon={<IconLeak />}
+          chapter="Where the money leaks"
           title={
             <>
               Supply companies rarely lose on price. They lose on <Em>hours.</Em>
@@ -108,7 +100,7 @@ export function Problem() {
           }
           lead="Three delays we see in almost every supplier we audit. None of them need more staff. Each one is an agent doing one job well."
         />
-        <ol className="mt-12 grid gap-px bg-gray-200 border border-gray-200 rounded-2xl overflow-hidden md:grid-cols-3">
+        <ol className="mt-12 grid gap-px bg-gray-200 border border-gray-200 rounded-[20px] overflow-hidden md:grid-cols-3">
           {pains.map((p, i) => (
             <li key={p.t} className={`bg-white p-7 reveal reveal-delay-${i + 1} relative`}>
               <span className="chapter">{p.n}</span>
@@ -131,8 +123,7 @@ export function ServicesGrid({ compact = false }: { compact?: boolean }) {
       <div className="container">
         {!compact ? (
           <SectionHeading
-            chapter="02 / What we build"
-            icon={<IconAgents />}
+            chapter="What we build"
             title={
               <>
                 Agents named for the job, <Em>not the technology.</Em>
@@ -142,7 +133,7 @@ export function ServicesGrid({ compact = false }: { compact?: boolean }) {
           />
         ) : null}
         <div className={`${compact ? "" : "mt-12"} grid gap-5 lg:grid-cols-[1.15fr_1fr_1fr]`}>
-          <Link href={`/services/${flagship.slug}`} className="card card-marks glass-hover p-8 lg:row-span-2 flex flex-col reveal relative overflow-hidden">
+          <Link href={`/services/${flagship.slug}`} className="card-soft glass-hover p-8 lg:row-span-2 flex flex-col reveal relative overflow-hidden">
             
             <div className="relative flex items-center justify-between">
               <span className="chapter">{flagship.eyebrow}</span>
@@ -151,14 +142,14 @@ export function ServicesGrid({ compact = false }: { compact?: boolean }) {
             <div className="relative w-12 h-12 mt-8 rounded-full grid place-items-center bg-navy text-white">
               <ServiceIcon name={flagship.icon} width={22} height={22} />
             </div>
-            <h3 className="relative font-display font-bold text-navy mt-6" style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)", lineHeight: 1.02, letterSpacing: "-0.03em" }}>
+            <h3 className="relative font-display font-semibold text-navy mt-6" style={{ fontSize: "clamp(1.7rem, 2.8vw, 2.3rem)", lineHeight: 1.05, letterSpacing: "-0.03em" }}>
               {flagship.name}
             </h3>
             <p className="relative mt-4 text-gray-600 leading-relaxed text-lg">{flagship.short}</p>
             <ul className="relative mt-6 space-y-2.5 text-gray-600">
               {flagship.bullets.slice(0, 4).map((b) => (
                 <li key={b} className="flex gap-3">
-                  <Check className="text-blue mt-0.5 flex-none" width={18} height={18} /> <span>{b}</span>
+                  <Check className="text-navy mt-0.5 flex-none" width={18} height={18} /> <span>{b}</span>
                 </li>
               ))}
             </ul>
@@ -172,7 +163,7 @@ export function ServicesGrid({ compact = false }: { compact?: boolean }) {
                 <span className="chapter">{s.eyebrow}</span>
                 <span className="num">{s.timeline}</span>
               </div>
-              <div className="w-11 h-11 mt-6 rounded-full grid place-items-center border border-navy text-navy">
+              <div className="w-11 h-11 mt-6 rounded-full grid place-items-center bg-gray-100 text-navy">
                 <ServiceIcon name={s.icon} width={20} height={20} />
               </div>
               <h3 className="h3 mt-5">{s.name}</h3>
@@ -198,11 +189,10 @@ export function Process() {
     { n: "04", t: "Tune", d: "Thirty days of reading real conversations, fixing edge cases, and widening what the agent may handle alone.", when: "Days 1 to 30" },
   ];
   return (
-    <section className="section bg-white/40 border-y border-gray-200 overflow-hidden">
+    <section className="section section-soft overflow-hidden">
       <div className="container">
         <SectionHeading
-          chapter="03 / How it happens"
-          icon={<IconSteps />}
+          chapter="How it happens"
           title={
             <>
               Four weeks from first call to an agent <Em>doing the work.</Em>
@@ -210,26 +200,18 @@ export function Process() {
           }
           lead="No discovery phase that drags. One workflow, scoped and shipped, then the next one."
         />
-        <div className="relative mt-16">
-          <span className="strand-h absolute inset-x-0 top-[18px] hidden lg:block" aria-hidden="true" />
-          <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {steps.map((s, i) => (
-              <li key={s.n} className={`reveal reveal-delay-${i + 1} relative lg:pt-16`}>
-                <span className="hidden lg:grid absolute left-6 top-[8px] w-6 h-6 rounded-full bg-cream place-items-center" aria-hidden="true">
-                  <span className={`w-3 h-3 rounded-full ${i === 1 ? "bg-blue node-pulse" : "bg-navy"}`} />
-                </span>
-                <div className="card card-marks p-6 h-full">
-                  <div className="flex items-center justify-between">
-                    <span className="chapter">{s.n}</span>
-                    <span className="num">{s.when}</span>
-                  </div>
-                  <h3 className="h3 mt-4">{s.t}</h3>
-                  <p className="mt-3 text-gray-600 leading-relaxed text-[0.95rem]">{s.d}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
+        <ol className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {steps.map((s, i) => (
+            <li key={s.n} className={`reveal reveal-delay-${i + 1} border-t border-gray-300 pt-6`}>
+              <div className="flex items-center justify-between">
+                <span className="chapter !text-navy">{s.n}</span>
+                <span className="num">{s.when}</span>
+              </div>
+              <h3 className="h3 mt-5">{s.t}</h3>
+              <p className="mt-3 text-gray-600 leading-relaxed text-[0.95rem]">{s.d}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
@@ -244,8 +226,7 @@ export function Proof({ limit = 3 }: { limit?: number }) {
     <section className="section" id="results">
       <div className="container">
         <SectionHeading
-          chapter="04 / Numbers"
-          icon={<IconNumbers />}
+          chapter="Results"
           title={
             <>
               One number per engagement, <Em>agreed before we start.</Em>
@@ -265,7 +246,7 @@ export function Proof({ limit = 3 }: { limit?: number }) {
                     <span className="text-xs text-gray-500 leading-snug">{m.label}</span>
                     <span className="flex items-baseline gap-2 whitespace-nowrap">
                       <span className="text-gray-500 line-through text-sm">{m.before}</span>
-                      <span className="font-display font-bold text-2xl text-navy">{m.after}</span>
+                      <span className="font-display font-semibold text-2xl text-navy">{m.after}</span>
                     </span>
                   </div>
                 ))}
@@ -295,8 +276,7 @@ export function Founders({ full = false }: { full?: boolean }) {
       <div className="container">
         {!full ? (
           <SectionHeading
-            chapter="05 / Who you get"
-            icon={<IconTeam />}
+            chapter="Who you get"
             title={
               <>
                 Four people. <Em>No account managers.</Em>
@@ -311,13 +291,11 @@ export function Founders({ full = false }: { full?: boolean }) {
             const initials = todoName ? "?" : f.name.split(" ").map((n) => n[0]).join("");
             return (
               <div key={f.name + i} className={`card p-5 reveal reveal-delay-${(i % 4) + 1} flex flex-col`} id={todoName ? undefined : f.name.toLowerCase().replace(/\s+/g, "-")}>
-                <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-cream border border-gray-200">
+                <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-cream-2">
                   {f.photo.endsWith(".svg") ? (
                     <div className="absolute inset-0 grid place-items-center">
-                      <span className="absolute right-3 top-3 w-14 h-3 rungs" aria-hidden="true" />
-                      <span className="absolute -left-6 -bottom-6 w-24 h-24 orbit" aria-hidden="true" />
-                      <span className="relative font-display font-bold text-5xl text-navy">{initials}</span>
-                      <span className="absolute bottom-3 text-[11px] font-mono text-gray-500">photo coming</span>
+                      <span className="relative font-display font-semibold text-5xl text-navy">{initials}</span>
+                      <span className="absolute bottom-3 fig">Photo coming</span>
                     </div>
                   ) : (
                     <Image src={f.photo} alt={`${f.name}, ${f.role}`} fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
@@ -325,13 +303,13 @@ export function Founders({ full = false }: { full?: boolean }) {
                 </div>
                 <div className="mt-5 flex items-center justify-between gap-2">
                   <h3 className="h3 !text-[1.15rem]">{todoName ? "Team member" : f.name}</h3>
-                  {f.kind === "founder" ? <span className="text-[10px] font-mono uppercase tracking-wide text-blue border border-blue-300 rounded-full px-2 py-0.5">Founder</span> : null}
+                  {f.kind === "founder" ? <span className="text-[11px] font-medium text-navy bg-gray-100 rounded-full px-2.5 py-1">Founder</span> : null}
                 </div>
                 <p className="text-gray-500 text-sm mt-1">{isTodo(f.role) ? (f.kind === "founder" ? "Co-founder" : "Team") : f.role}</p>
                 <ul className="mt-4 space-y-2 text-gray-600 text-sm">
                   {f.credentials.filter((c) => !isTodo(c)).map((c) => (
                     <li key={c} className="flex gap-2.5">
-                      <Check width={16} height={16} className="text-blue mt-0.5 flex-none" /> <span>{c}</span>
+                      <Check width={16} height={16} className="text-navy mt-0.5 flex-none" /> <span>{c}</span>
                     </li>
                   ))}
                 </ul>
@@ -360,7 +338,7 @@ export function Founders({ full = false }: { full?: boolean }) {
 
 function Cell({ v }: { v: string }) {
   const s = v.toLowerCase();
-  if (s === "yes") return <span className="inline-flex items-center gap-2 text-navy font-semibold"><Check width={18} height={18} className="text-blue" /> Yes</span>;
+  if (s === "yes") return <span className="inline-flex items-center gap-2 text-navy font-semibold"><Check width={18} height={18} className="text-teal" /> Yes</span>;
   if (s === "no") return <span className="inline-flex items-center gap-2 text-gray-500"><X width={18} height={18} /> No</span>;
   if (s === "partial" || s === "sometimes") return <span className="inline-flex items-center gap-2 text-navy-3"><Minus width={18} height={18} /> {v[0].toUpperCase() + v.slice(1)}</span>;
   return <span className="text-navy">{v}</span>;
@@ -414,13 +392,9 @@ export function CompareTable({
 export function HomeCompare() {
   return (
     <section className="section">
-      <Doodle style={{ right: "6%", top: 48 }}>
-        <Curve />
-      </Doodle>
       <div className="container">
         <SectionHeading
-          chapter="06 / Read only vs write access"
-          icon={<IconCompare />}
+          chapter="Read only vs write access"
           title={
             <>
               {COMPARE.home.title.split(".")[0]}. <Em>{COMPARE.home.title.split(".")[1]?.trim()}.</Em>
@@ -443,14 +417,11 @@ export function HomeCompare() {
 
 export function PricingCards({ withHeading = true }: { withHeading?: boolean }) {
   return (
-    <section className="section section-dark relative overflow-hidden" id="pricing">
-      <span className="strand-h-light absolute inset-x-0 top-10" aria-hidden="true" />
-      <span className="rungs-light absolute right-[10%] bottom-16 w-40 h-3 hidden lg:block" aria-hidden="true" />
+    <section className="section section-soft relative" id="pricing">
       <div className="container relative">
         {withHeading ? (
           <SectionHeading
-            chapter="07 / Pricing"
-            icon={<IconPrice className="text-white" />}
+            chapter="Pricing"
             title={
               <>
                 A number in writing <Em>before we build.</Em>
@@ -463,17 +434,17 @@ export function PricingCards({ withHeading = true }: { withHeading?: boolean }) 
           {PRICING.tiers.map((t, i) => {
             const priceTodo = isTodo(t.price);
             return (
-              <div key={t.name} className={`plate card-marks p-7 flex flex-col reveal reveal-delay-${i + 1} ${t.featured ? "md:-translate-y-3 !border-yellow" : ""}`}>
+              <div key={t.name} className={`card p-7 flex flex-col reveal reveal-delay-${i + 1} ${t.featured ? "!border-navy" : ""}`}>
                 <div className="flex items-center justify-between">
                   <span className="chapter">{String(i + 1).padStart(2, "0")}</span>
-                  {t.featured ? <span className="fig !text-yellow">most start here</span> : null}
+                  {t.featured ? <span className="text-[11px] font-medium text-white bg-navy rounded-full px-2.5 py-1">Most start here</span> : null}
                 </div>
                 <h3 className="h3 mt-5">{t.name}</h3>
-                <div className="price mt-5 !text-white">
+                <div className="price mt-5">
                   {priceTodo ? "Priced" : t.price}
-                  <small className="!text-[#9fb0e6]">/ {t.unit}</small>
+                  <small>/ {t.unit}</small>
                 </div>
-                <p className="mt-5 leading-relaxed">{t.body}</p>
+                <p className="mt-5 leading-relaxed text-gray-600">{t.body}</p>
                 <Link href={t.href} className={`btn mt-7 ${t.featured ? "btn-primary" : "btn-ghost"}`}>
                   {t.cta}
                 </Link>
@@ -481,10 +452,10 @@ export function PricingCards({ withHeading = true }: { withHeading?: boolean }) 
             );
           })}
         </div>
-        <ul className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-3 text-sm" style={{ color: "#c9d3f2" }}>
+        <ul className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-3 text-sm text-gray-600">
           {PRICING.principles.map((p) => (
             <li key={p} className="inline-flex items-start gap-2">
-              <Check width={16} height={16} className="text-yellow mt-0.5 flex-none" /> <span>{p}</span>
+              <Check width={16} height={16} className="text-navy mt-0.5 flex-none" /> <span>{p}</span>
             </li>
           ))}
         </ul>
@@ -501,13 +472,38 @@ export function Guarantee() {
   return (
     <section className="container py-8">
       <div className="card card-accent p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6 reveal">
-        <div className="w-14 h-14 rounded-full grid place-items-center bg-navy text-cream flex-none">
-          <IconNumbers width={28} />
-        </div>
         <div>
           <h3 className="h3">{g.headline}</h3>
           <p className="mt-2 text-gray-600 leading-relaxed">{g.body}</p>
           <p className="mt-2 text-xs text-gray-500">{g.fine}</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Home lead form ---------- */
+
+export function HomeLead() {
+  return (
+    <section className="section border-t border-gray-200" id="quote">
+      <div className="container grid gap-12 lg:grid-cols-[0.9fr_1.1fr] items-start">
+        <div className="reveal">
+          <p className="chapter mb-5">Start here</p>
+          <h2 className="h2">
+            Tell us what slows your quotes. <Em>We reply within a business day.</Em>
+          </h2>
+          <p className="lead mt-6 max-w-md">Two minutes. A founder reads it, not a form queue. You get a plain answer on whether an agent would pay for itself, and what it would cost.</p>
+          <ul className="mt-8 space-y-3 text-gray-600">
+            {["No sales deck, no discovery retainer", "Fixed price in writing before any build", "You keep the code, the accounts, and the data"].map((t) => (
+              <li key={t} className="flex gap-3">
+                <Check width={18} height={18} className="text-navy mt-0.5 flex-none" /> <span>{t}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="reveal reveal-delay-1">
+          <LeadForm variant="page" />
         </div>
       </div>
     </section>
@@ -522,14 +518,10 @@ export function Faq({ items = FAQ, heading = true }: { items?: { q: string; a: s
       <div className="container grid gap-10 lg:grid-cols-[0.9fr_1.4fr]">
         {heading ? (
           <div className="reveal">
-            <p className="chapter mb-5">08 / Questions</p>
-            <h2 className="h2 flex items-start gap-4">
-              <span className="text-navy mt-1 hidden sm:inline"><IconQuestion /></span>
-              <span>
-                What buyers ask us <Em>on the first call.</Em>
-              </span>
+            <p className="chapter mb-5">Questions</p>
+            <h2 className="h2">
+              What buyers ask us <Em>on the first call.</Em>
             </h2>
-            <Strand length={120} className="mt-8 text-navy" />
           </div>
         ) : (
           <div />
@@ -559,10 +551,7 @@ export function Faq({ items = FAQ, heading = true }: { items?: { q: string; a: s
 export function CtaBand({ title, body }: { title?: React.ReactNode; body?: string }) {
   return (
     <section className="container pb-24 pt-6">
-      <div className="relative section-dark rounded-[10px] overflow-hidden p-10 md:p-14 reveal">
-        <span className="crosshair text-white left-5 top-5" aria-hidden="true" />
-        <span className="crosshair text-white right-5 bottom-5" aria-hidden="true" />
-        <span className="strand-h-light absolute right-8 top-8 w-64 hidden md:block" aria-hidden="true" />
+      <div className="relative section-dark rounded-[24px] overflow-hidden p-10 md:p-16 reveal">
         <div className="relative grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-center">
           <div>
             <p className="chapter mb-5">Next step</p>

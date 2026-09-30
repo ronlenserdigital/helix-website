@@ -40,18 +40,19 @@ With no env vars set the site still builds and runs. The form returns ok, logs t
 
 ## Design system
 
-Own visual language built on one idea: two strands, rungs between them, nodes where the work happens. Warm cream page, navy type, one blue. Navy sections for pricing and footer.
+Official and minimal, in the register of Anthropic, OpenAI, and Meta: white page, one ink color pulled from the logo, one soft surface, hairlines, pill buttons, large type with a second gray tone for emphasis. No decoration that is not information.
 
 | Token | Value |
 |-------|-------|
-| Page background | `#fffaf0` cream, `#feefcf` highlight |
-| Headings | `#0e1c2d` navy, Bricolage Grotesque 700, tight tracking, blue italic for the emphasized phrase |
-| Body | `#686f76` gray, Figtree. Labels and chapter numbers in Geist Mono |
-| Primary | navy pill buttons, blue on hover. Ghost buttons: navy outline pill |
-| Accent | blue `#1566b9`, yellow and teal only as status dots |
-| Borders | `#e1ded8`, 16px radius, no shadows |
+| Page | `#ffffff`; soft sections `.section-soft` `#f5f5f4` |
+| Ink | `#0e1c2d` (logo navy). Dark surfaces (footer, CTA band) use the same ink |
+| Headings | Inter Tight 600, tight tracking. `<Em>` renders the second phrase in gray `#7b7f88`, never italic, never colored |
+| Body | Inter, `#5c6069`. Labels (`.chapter`, `.fig`, `.num`) small Inter 500 gray |
+| Accent | logo blue `#1566b9`, reserved for links inside content. Green `#2f9e6a` only for "yes" states |
+| Buttons | `.btn-primary` ink pill, white on dark. `.btn-ghost` gray-100 pill |
+| Cards | white with `#e7e8ea` hairline, 20px radius. `.card-soft` gray surface, no border. No shadows |
 
-Motifs live in `src/components/doodles.tsx` (Strand, Node, Rungs, Curve, section icons) and `src/app/globals.css` (`.strand-h`, `.strand-v`, `.rungs`, `.orbit`, `.spot-blue`, `.flow-path`, `.node-pulse`). Section headings are editorial: chapter label, headline left, lead right (`SectionHeading`). The hero flow (`src/components/helix-flow.tsx`) is the signature illustration: request, agent, quote on an animated strand.
+Blueprint-era classes (`.strand-*`, `.rungs*`, `.orbit`, `.crosshair`, `.dim`, `.card-marks`, `.watermark`) are kept as no-ops in `globals.css` so old markup renders clean. The hero flow (`src/components/helix-flow.tsx`) is three quiet cards: request, agent, quote.
 
 Photos: real founder photos go in `public/founders/` as `ron.jpg`, `martin.jpg`, `constantine.jpg`, `thomas.jpg`; update `photo` paths in `src/data/founders.json`. Until then the cards show initials.
 

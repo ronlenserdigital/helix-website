@@ -34,21 +34,21 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 bg-cream border-b border-gray-200 ${
-        scrolled ? "shadow-[0_8px_30px_-20px_rgba(11,21,51,0.4)]" : ""
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 bg-white/85 backdrop-blur-md ${
+        scrolled ? "border-b border-gray-200" : "border-b border-transparent"
       }`}
     >
       <div className="container flex h-[72px] items-center justify-between gap-6">
         <Link href="/" className="flex items-center" aria-label="Helix Research Technologies home">
-          <Image src="/brand/helix-horizontal.svg" alt="Helix Research Technologies" width={148} height={58} priority className="h-9 w-auto" />
+          <Image src="/brand/helix-horizontal.svg" alt="Helix Research Technologies" width={148} height={58} priority className="h-8 w-auto" />
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-8 text-[0.95rem] font-medium text-navy" aria-label="Primary">
+        <nav className="hidden lg:flex items-center gap-8 text-[0.92rem] font-medium text-gray-600" aria-label="Primary">
           {NAV.map((n) => (
             <Link
               key={n.href}
               href={n.href}
-              className={`hover:text-blue transition-colors ${pathname.startsWith(n.href) ? "text-blue" : ""}`}
+              className={`hover:text-navy transition-colors ${pathname.startsWith(n.href) ? "text-navy" : ""}`}
             >
               {n.label}
             </Link>
@@ -73,7 +73,7 @@ export default function Header() {
       </div>
 
       {open ? (
-        <div id="mobile-nav" className="lg:hidden border-t border-gray-200 bg-cream">
+        <div id="mobile-nav" className="lg:hidden border-t border-gray-200 bg-white">
           <nav className="container py-4 flex flex-col gap-1" aria-label="Mobile">
             {NAV.map((n) => (
               <Link key={n.href} href={n.href} className="py-3 text-lg font-medium text-navy border-b border-gray-200">

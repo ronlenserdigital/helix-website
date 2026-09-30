@@ -59,7 +59,7 @@ export default async function IndustryPage(props: PageProps<"/industries/[slug]"
                 <p className="eyebrow mb-2">Signal</p>
                 <p className="font-semibold">{s.signal}</p>
                 <div className="hairline my-4" />
-                <p className="eyebrow mb-2 !text-blue">Fix</p>
+                <p className="eyebrow mb-2 !text-navy">Fix</p>
                 <p className="text-gray-600">{s.fix}</p>
               </div>
             ))}
@@ -74,7 +74,7 @@ export default async function IndustryPage(props: PageProps<"/industries/[slug]"
             <ul className="mt-8 space-y-3">
               {ind.useCases.map((u) => (
                 <li key={u} className="flex gap-3 text-gray-600">
-                  <Check width={18} height={18} className="text-blue mt-0.5 flex-none" /> <span>{u}</span>
+                  <Check width={18} height={18} className="text-navy mt-0.5 flex-none" /> <span>{u}</span>
                 </li>
               ))}
             </ul>

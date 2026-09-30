@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Figtree, Geist_Mono } from "next/font/google";
+import { Inter, Inter_Tight } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
@@ -10,9 +10,8 @@ import StickyCta from "@/components/sticky-cta";
 import RevealObserver from "@/components/reveal-observer";
 import { OrganizationJsonLd } from "@/components/json-ld";
 
-const bricolage = Bricolage_Grotesque({ variable: "--font-bricolage", subsets: ["latin"], weight: ["500", "600", "700", "800"] });
-const figtree = Figtree({ variable: "--font-figtree", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
+const interTight = Inter_Tight({ variable: "--font-inter-tight", subsets: ["latin"], weight: ["500", "600"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -42,7 +41,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fffaf0",
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
@@ -53,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${bricolage.variable} ${figtree.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${interTight.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         {GTM_ID ? (

@@ -70,7 +70,7 @@ export default async function ContactPage(props: PageProps<"/contact">) {
                   "A written scope and fixed price within two business days, if it fits",
                 ].map((t) => (
                   <li key={t} className="flex gap-3">
-                    <Check width={18} height={18} className="text-blue mt-0.5 flex-none" /> <span>{t}</span>
+                    <Check width={18} height={18} className="text-navy mt-0.5 flex-none" /> <span>{t}</span>
                   </li>
                 ))}
               </ul>

@@ -1,7 +1,6 @@
 import Hero from "@/components/hero";
 import {
   TrustStrip,
-  Stats,
   Problem,
   ServicesGrid,
   Process,
@@ -12,6 +11,7 @@ import {
   Guarantee,
   Faq,
   CtaBand,
+  HomeLead,
 } from "@/components/sections";
 import { FaqJsonLd } from "@/components/json-ld";
 
@@ -20,7 +20,6 @@ export default function HomePage() {
     <>
       <Hero />
       <TrustStrip />
-      <Stats />
       <Problem />
       <ServicesGrid />
       <Process />
@@ -29,6 +28,7 @@ export default function HomePage() {
       <HomeCompare />
       <PricingCards />
       <Guarantee />
+      <HomeLead />
       <Faq />
       <CtaBand />
       <FaqJsonLd />

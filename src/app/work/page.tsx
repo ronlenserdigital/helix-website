@@ -47,7 +47,7 @@ export default function WorkPage() {
                       <div className="flex items-baseline gap-2">
                         <span className="text-gray-500 line-through text-sm">{m.before}</span>
                         <ArrowRight width={12} height={12} className="text-gray-500" />
-                        <span className="text-xl font-semibold text-blue">{m.after}</span>
+                        <span className="text-xl font-semibold text-navy">{m.after}</span>
                       </div>
                       <p className="text-[11px] text-gray-500 mt-1 leading-snug">{m.label}</p>
                     </div>

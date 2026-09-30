@@ -60,7 +60,7 @@ export default async function CasePage(props: PageProps<"/work/[slug]">) {
                   <div className="mt-3 flex items-baseline gap-3">
                     <span className="text-gray-500 line-through text-xl">{m.before}</span>
                     <ArrowRight width={16} height={16} className="text-gray-500" />
-                    <span className="text-4xl font-semibold text-blue tracking-tight">{m.after}</span>
+                    <span className="text-4xl font-semibold text-navy tracking-tight">{m.after}</span>
                   </div>
                 </div>
               ))}
@@ -70,7 +70,7 @@ export default async function CasePage(props: PageProps<"/work/[slug]">) {
                 <p className="eyebrow mb-3">Built with</p>
                 <h2 className="h3">{svc.name}</h2>
                 <p className="mt-3 text-gray-600">{svc.outcome}</p>
-                <Link href={`/services/${svc.slug}`} className="mt-5 inline-flex items-center gap-2 text-blue">
+                <Link href={`/services/${svc.slug}`} className="mt-5 inline-flex items-center gap-2 text-navy underline underline-offset-4">
                   How the {svc.name} works <ArrowUpRight width={16} height={16} />
                 </Link>
               </div>

@@ -58,7 +58,7 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
               <ul className="space-y-3">
                 {s.bullets.map((b) => (
                   <li key={b} className="flex gap-3 text-gray-600">
-                    <Check width={18} height={18} className="text-blue mt-0.5 flex-none" /> <span>{b}</span>
+                    <Check width={18} height={18} className="text-navy mt-0.5 flex-none" /> <span>{b}</span>
                   </li>
                 ))}
               </ul>
@@ -94,7 +94,7 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {others.map((o) => (
               <Link key={o.slug} href={`/services/${o.slug}`} className="glass glass-hover p-6 flex flex-col reveal">
-                <div className="w-10 h-10 rounded-xl grid place-items-center bg-blue-100 text-blue">
+                <div className="w-10 h-10 rounded-xl grid place-items-center bg-gray-100 text-navy">
                   <ServiceIcon name={o.icon} width={18} height={18} />
                 </div>
                 <h3 className="font-semibold mt-4">{o.name}</h3>

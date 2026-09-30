@@ -15,14 +15,12 @@ export default function PageHero({
   align?: "center" | "left";
 }) {
   return (
-    <section className="section-dark relative overflow-hidden pt-[72px]">
-      <span className="crosshair text-white left-8 top-28 hidden lg:block" aria-hidden="true" />
-      <span className="crosshair text-white right-8 bottom-8 hidden lg:block" aria-hidden="true" />
-      <div className="container relative py-16 lg:py-24">
+    <section className="relative pt-[72px] border-b border-gray-200">
+      <div className="container py-16 lg:py-24">
         <div className="heading-row">
           <div>
             {eyebrow ? <p className="chapter mb-5">{eyebrow}</p> : null}
-            <h1 className="display text-white" style={{ fontSize: "clamp(2.4rem, 5.2vw, 4.4rem)" }}>
+            <h1 className="display" style={{ fontSize: "clamp(2.3rem, 4.8vw, 4rem)" }}>
               {title}
             </h1>
           </div>

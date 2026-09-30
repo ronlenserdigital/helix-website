@@ -26,16 +26,15 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="section-dark mt-10 relative overflow-hidden">
-      <Image src="/brand/helix-symbol-reverse.svg" alt="" width={720} height={720} className="watermark" aria-hidden="true" />
+    <footer className="section-dark mt-10 relative">
       <div className="container relative pt-20 pb-10">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_2fr]">
           <div>
             <Image src="/brand/helix-horizontal-reverse.svg" alt={SITE.name} width={200} height={78} loading="eager" />
-            <p className="mt-6 text-[#c9d3f2] leading-relaxed max-w-sm">
+            <p className="mt-6 text-[#b8bcc6] leading-relaxed max-w-sm">
               AI agents for lab, medical, and industrial supply companies. Built in Fredericksburg, Virginia. Owned by the client, always.
             </p>
-            <div className="mt-6 flex flex-col gap-1.5 text-sm text-[#c9d3f2]">
+            <div className="mt-6 flex flex-col gap-1.5 text-sm text-[#b8bcc6]">
               <a href={`mailto:${SITE.email}`} className="hover:text-white underline-slide w-fit">{SITE.email}</a>
               {!isTodo(SITE.phone) ? (
                 <a href={`tel:${SITE.phone}`} className="hover:text-white underline-slide w-fit">{SITE.phoneDisplay}</a>
@@ -47,7 +46,7 @@ export default function Footer() {
                 Book 30 minutes
               </Link>
               {!isTodo(SITE.socials.linkedin) ? (
-                <a href={SITE.socials.linkedin} rel="noopener" aria-label="LinkedIn" className="w-10 h-10 rounded-full grid place-items-center text-cream ring-1 ring-cream/40 hover:bg-cream/10">
+                <a href={SITE.socials.linkedin} rel="noopener" aria-label="LinkedIn" className="w-10 h-10 rounded-full grid place-items-center text-white bg-white/10 hover:bg-white/20">
                   <Linkedin width={18} height={18} />
                 </a>
               ) : null}
@@ -60,7 +59,7 @@ export default function Footer() {
                 <ul className="space-y-2.5">
                   {c.links.map((l) => (
                     <li key={l.href + l.label}>
-                      <Link href={l.href} className="text-sm text-[#c9d3f2] hover:text-white underline-slide">
+                      <Link href={l.href} className="text-sm text-[#b8bcc6] hover:text-white underline-slide">
                         {l.label}
                       </Link>
                     </li>
@@ -71,9 +70,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <span className="strand-h-light block mt-16" aria-hidden="true" />
-
-        <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-between text-xs text-[#c9d3f2]">
+        <div className="mt-16 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-3 justify-between text-xs text-[#b8bcc6]">
           <span>© {year} {SITE.name}. Fredericksburg, VA.</span>
           <span>Built with AI. Owned by you.</span>
         </div>
