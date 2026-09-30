@@ -9,7 +9,7 @@ export default function StickyCta() {
   return (
     <div className="sticky-cta">
       <Link href="/contact" className="btn btn-primary w-full shadow-xl">
-        Book 30 Minutes Free
+        Book 30 minutes with a founder
       </Link>
     </div>
   );

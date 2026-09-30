@@ -1,5 +1,5 @@
 {
-  "intro": "No hourly billing. No surprise invoices. A number in writing before we build.",
+  "intro": "No hourly. No retainer you did not choose. One written number after one call, and the audit fee comes off the build.",
   "tiers": [
     {
       "name": "Discovery call",
@@ -29,11 +29,28 @@
       "featured": false
     }
   ],
-  "budgetTiers": ["Under $5K", "$5K to $15K", "$15K+", "Monthly agent plan"],
+  "budgetTiers": [
+    "Under $5K",
+    "$5K to $15K",
+    "$15K+",
+    "Monthly agent plan"
+  ],
   "shapes": [
-    { "name": "Single workflow", "timeline": "2 to 4 weeks", "example": "One agent on one channel: receptionist on the main line, follow-up on open quotes." },
-    { "name": "Cross-system", "timeline": "4 to 8 weeks", "example": "Quote desk connected to catalog, ERP export, and GoHighLevel with approvals." },
-    { "name": "Platform", "timeline": "2 to 4 months", "example": "Customer portal plus agents plus CRM, built as one system you own." }
+    {
+      "name": "Single workflow",
+      "timeline": "2 to 4 weeks",
+      "example": "One agent on one channel: receptionist on the main line, follow-up on open quotes."
+    },
+    {
+      "name": "Cross-system",
+      "timeline": "4 to 8 weeks",
+      "example": "Quote desk connected to catalog, ERP export, and GoHighLevel with approvals."
+    },
+    {
+      "name": "Platform",
+      "timeline": "2 to 4 months",
+      "example": "Customer portal plus agents plus CRM, built as one system you own."
+    }
   ],
   "principles": [
     "Fixed price, quoted in writing after one call",

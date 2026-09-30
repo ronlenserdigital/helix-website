@@ -11,7 +11,7 @@ const NAV = [
   { href: "/industries/lab-supply", label: "Who it is for" },
   { href: "/work", label: "Results" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/about", label: "Founders" },
+  { href: "/about", label: "Team" },
 ];
 
 export default function Header() {
@@ -57,7 +57,7 @@ export default function Header() {
 
         <div className="hidden lg:flex items-center gap-3">
           <Link href="/contact" className="btn btn-primary btn-sm">
-            Book 30 Minutes Free
+            Book 30 minutes
           </Link>
         </div>
 
@@ -81,7 +81,7 @@ export default function Header() {
               </Link>
             ))}
             <Link href="/contact" className="btn btn-primary mt-4">
-              Book 30 Minutes Free
+              Book 30 minutes
             </Link>
           </nav>
         </div>

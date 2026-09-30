@@ -1,7 +1,7 @@
 [
   {
     "q": "What do you actually build?",
-    "a": "AI agents that do a specific job in your business: answer quote requests, chase reorders and open quotes, answer the phone and chat. Underneath them, GoHighLevel systems and custom software when you need it. We build with AI tools, we ship fast, and you own everything."
+    "a": "AI agents that do one job in a supply business: read a quote request and price it from your catalog, chase open quotes and predictable reorders, answer the phone and the site chat. Underneath: GoHighLevel pipelines and, when you need it, custom software. We build with AI tools and ship in weeks. You own the result."
   },
   {
     "q": "Why would this work when other automation did not?",
@@ -9,7 +9,7 @@
   },
   {
     "q": "What if the agent does not know the answer?",
-    "a": "It says so and hands off to a person with the full context attached. It never invents a price or a spec. You decide what it may answer, what needs approval, and when it must stop."
+    "a": "It stops and hands the thread to a person with everything attached: the request, the catalog matches it found, the price it would have quoted. It never invents a part number, a price, or a lead time. You set what it may answer alone, what needs approval, and when it must stay quiet."
   },
   {
     "q": "How much does it cost?",
@@ -29,6 +29,6 @@
   },
   {
     "q": "Is our data safe?",
-    "a": "Agents only get access to what the job needs. No patient data, no card numbers. Everything runs in your accounts, not ours. We document what connects to what."
+    "a": "Agents get access to exactly what the job needs: your catalog, price rules, and CRM. No patient data, no card numbers, no bank logins. Everything runs inside accounts you own. We document every connection and you can revoke any of them without calling us."
   }
 ]

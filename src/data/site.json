@@ -3,8 +3,8 @@
   "shortName": "Helix",
   "domain": "helixresearchtech.com",
   "url": "https://helixresearchtech.com",
-  "tagline": "AI agents that run the busywork for supply companies.",
-  "description": "Helix builds AI agents and GoHighLevel systems for lab and medical supply companies. Quote desk, reorder follow-up, receptionist. Fixed price, quoted in writing, you own everything.",
+  "tagline": "AI agents that run the quote desk for supply companies.",
+  "description": "Helix builds AI agents for lab, medical, and industrial supply companies: quote desk, reorder follow-up, receptionist. Priced from your catalog, logged in your CRM, sent under your name. Fixed price, you own everything. Fredericksburg, VA.",
   "email": "hello@helixresearchtech.com",
   "phone": "TODO",
   "phoneDisplay": "TODO",
@@ -19,7 +19,7 @@
     "x": ""
   },
   "calendarUrl": "",
-  "calendarNote": "30 minutes. No pitch deck. We look at how quotes and follow-ups move through your business today and tell you honestly whether an agent would pay for itself.",
+  "calendarNote": "Thirty minutes with a founder. No slides. We walk through how a quote request moves through your inbox today, count the hours it loses, and tell you plainly whether an agent would pay for itself.",
   "guarantee": {
     "enabled": false,
     "headline": "TODO guarantee headline",
@@ -27,9 +27,21 @@
     "fine": "Terms agreed in writing before the build starts."
   },
   "stats": [
-    { "value": "3", "label": "founders, all builders" },
-    { "value": "1 day", "label": "max reply time" },
-    { "value": "Fixed", "label": "price, in writing" },
-    { "value": "100%", "label": "yours: code, data, accounts" }
+    {
+      "value": "< 2 min",
+      "label": "target reply time on quotes"
+    },
+    {
+      "value": "1 day",
+      "label": "max time to hear from us"
+    },
+    {
+      "value": "Fixed",
+      "label": "price, written before we build"
+    },
+    {
+      "value": "100%",
+      "label": "yours: code, data, accounts"
+    }
   ]
 }

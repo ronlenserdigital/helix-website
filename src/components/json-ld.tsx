@@ -10,7 +10,7 @@ function Script({ data }: { data: object }) {
 }
 
 export function OrganizationJsonLd() {
-  const founders = FOUNDERS.filter((f) => !isTodo(f.name)).map((f) => ({
+  const founders = FOUNDERS.filter((f) => !isTodo(f.name) && f.kind === "founder").map((f) => ({
     "@type": "Person",
     "@id": absoluteUrl(`/about#${f.name.toLowerCase().replace(/\s+/g, "-")}`),
     name: f.name,

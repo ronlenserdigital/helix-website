@@ -5,8 +5,8 @@ import { Em, Founders, SectionHeading, CtaBand } from "@/components/sections";
 import { BreadcrumbJsonLd } from "@/components/json-ld";
 
 export const metadata: Metadata = {
-  title: "Founders: three builders, no account managers",
-  description: "Helix Research Technologies is three founders in Fredericksburg, VA who build AI agents for supply companies and answer their own phones.",
+  title: "The Helix team: four builders, no account managers",
+  description: "Helix Research Technologies is three founders and a small team in Fredericksburg, VA who build AI agents for supply companies and answer their own phones.",
   alternates: { canonical: "/about" },
 };
 
@@ -23,15 +23,15 @@ export default function AboutPage() {
         eyebrow={`${SITE.city} · founded ${SITE.foundingYear}`}
         title={
           <>
-            Three founders. <Em>No account managers.</Em>
+            Four people. <Em>No account managers.</Em>
           </>
         }
-        lead="The person on your first call builds your system and picks up when it breaks. We started Helix because supply companies were losing orders to slow replies, and the agencies pitching them AI could not ship."
+        lead="The person on your first call builds your system and picks up when it breaks. We started Helix in Fredericksburg because supply companies around us were losing orders to slow replies, and the agencies pitching them AI could not ship anything that touched a real catalog."
       />
       <Founders full />
       <section className="section bg-white/50 border-y border-gray-200">
         <div className="container">
-          <SectionHeading eyebrow="How we work" title={<>Four things we <Em>will not compromise.</Em></>} />
+          <SectionHeading chapter="How we work" title={<>Four things we <Em>will not compromise.</Em></>} />
           <div className="mt-10 grid gap-4 md:grid-cols-2">
             {beliefs.map((b, i) => (
               <div key={b.t} className={`glass p-7 reveal reveal-delay-${(i % 4) + 1}`}>
@@ -44,7 +44,7 @@ export default function AboutPage() {
         </div>
       </section>
       <CtaBand />
-      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Founders", path: "/about" }]} />
+      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Team", path: "/about" }]} />
     </>
   );
 }

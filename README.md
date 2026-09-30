@@ -40,22 +40,20 @@ With no env vars set the site still builds and runs. The form returns ok, logs t
 
 ## Design system
 
-Modeled on the xray.tech look: warm cream page, navy type, one blue, navy sections for pricing and footer, hand-drawn doodles, line-art icons, halftone and hatch spots, giant wordmark in the footer.
+Own visual language built on one idea: two strands, rungs between them, nodes where the work happens. Warm cream page, navy type, one blue. Navy sections for pricing and footer.
 
 | Token | Value |
 |-------|-------|
-| Page background | `#fffaf0` (cream), price pills `#feefcf` |
-| Headings | `#0e1c2d` navy, Outfit 700, tight tracking |
-| Body | `#686f76` gray, Figtree |
-| Primary | `#1566b9` blue, hover `#0f4185` |
-| Accents | red `#f55647`, yellow `#f5cf45`, teal `#46c3b4` |
-| Borders | `#e1ded8` |
-| Buttons | 8px radius, 15/24 padding, solid blue or white ghost with blue text |
-| Cards | white, 1px border, 12px radius, no shadow. Cream cards on navy sections |
+| Page background | `#fffaf0` cream, `#feefcf` highlight |
+| Headings | `#0e1c2d` navy, Bricolage Grotesque 700, tight tracking, blue italic for the emphasized phrase |
+| Body | `#686f76` gray, Figtree. Labels and chapter numbers in Geist Mono |
+| Primary | navy pill buttons, blue on hover. Ghost buttons: navy outline pill |
+| Accent | blue `#1566b9`, yellow and teal only as status dots |
+| Borders | `#e1ded8`, 16px radius, no shadows |
 
-All tokens are in `src/app/globals.css`. Doodles (bolt, sparkle, arc, curl arrow, halftone, hatch) are in `src/components/doodles.tsx`. The helix hero visual is a 2D canvas in `src/components/helix-canvas.tsx`, navy and blue strokes to match the line-art style.
+Motifs live in `src/components/doodles.tsx` (Strand, Node, Rungs, Curve, section icons) and `src/app/globals.css` (`.strand-h`, `.strand-v`, `.rungs`, `.orbit`, `.spot-blue`, `.flow-path`, `.node-pulse`). Section headings are editorial: chapter label, headline left, lead right (`SectionHeading`). The hero flow (`src/components/helix-flow.tsx`) is the signature illustration: request, agent, quote on an animated strand.
 
-Next design step: custom character illustrations in the same line-art plus spot-color style (like the XRAY people) for the hero frame, pricing cards, and workshop-style sections. Commission or generate, then drop into `public/illustrations/`.
+Photos: real founder photos go in `public/founders/` as `ron.jpg`, `martin.jpg`, `constantine.jpg`, `thomas.jpg`; update `photo` paths in `src/data/founders.json`. Until then the cards show initials.
 
 ## Edit map (copy lives in data, not components)
 
@@ -84,7 +82,7 @@ Any value containing `TODO` in the data files is hidden on the site automaticall
 ## Before launch (the 10 fields)
 
 1. `site.json`: `phone`, `phoneDisplay`, `socials.linkedin`, `calendarUrl` (or the env var), `guarantee` (set `enabled: true` once wording is agreed).
-2. `founders.json`: Martin's 3 credentials + LinkedIn, third founder's name, role, credentials, LinkedIn. Drop real photos in `public/founders/` as `ron.jpg`, `martin.jpg`, `steen.jpg` and update the `photo` paths.
+2. `founders.json`: credentials, roles, and LinkedIn for Martin, Constantine, and Thomas. Real photos in `public/founders/`, then update the `photo` paths.
 3. `pricing.json`: audit `price` (currently `TODO`, renders as "Priced").
 4. `cases.json`: replace the three placeholder entries with real ones and set `status` to `"published"`. Until then they render as target outcomes with a visible label.
 5. Vercel env vars above.
