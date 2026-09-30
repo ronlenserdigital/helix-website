@@ -34,8 +34,8 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-cream/90 backdrop-blur-md border-b border-gray-200" : "bg-transparent"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 bg-cream border-b border-gray-200 ${
+        scrolled ? "shadow-[0_8px_30px_-20px_rgba(11,21,51,0.4)]" : ""
       }`}
     >
       <div className="container flex h-[72px] items-center justify-between gap-6">

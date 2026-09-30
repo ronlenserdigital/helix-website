@@ -74,7 +74,7 @@ export function TrustStrip() {
 export function Stats() {
   return (
     <section className="container py-10">
-      <dl className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-gray-200 rounded-2xl overflow-hidden border border-gray-200">
+      <dl className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-gray-200 rounded-[10px] overflow-hidden border border-gray-200">
         {SITE.stats.map((s, i) => (
           <div key={s.label} className={`bg-white p-6 reveal reveal-delay-${i + 1}`}>
             <dd className="font-display font-bold text-4xl text-navy tracking-tight">{s.value}</dd>
@@ -110,7 +110,7 @@ export function Problem() {
         />
         <ol className="mt-12 grid gap-px bg-gray-200 border border-gray-200 rounded-2xl overflow-hidden md:grid-cols-3">
           {pains.map((p, i) => (
-            <li key={p.t} className={`bg-white p-7 reveal reveal-delay-${i + 1}`}>
+            <li key={p.t} className={`bg-white p-7 reveal reveal-delay-${i + 1} relative`}>
               <span className="chapter">{p.n}</span>
               <h3 className="h3 mt-5">{p.t}</h3>
               <p className="mt-3 text-gray-600 leading-relaxed">{p.d}</p>
@@ -142,13 +142,13 @@ export function ServicesGrid({ compact = false }: { compact?: boolean }) {
           />
         ) : null}
         <div className={`${compact ? "" : "mt-12"} grid gap-5 lg:grid-cols-[1.15fr_1fr_1fr]`}>
-          <Link href={`/services/${flagship.slug}`} className="card card-accent glass-hover p-8 lg:row-span-2 flex flex-col reveal relative overflow-hidden">
-            <span className="spot-blue absolute -right-16 -top-16 w-56 h-56" aria-hidden="true" />
+          <Link href={`/services/${flagship.slug}`} className="card card-marks glass-hover p-8 lg:row-span-2 flex flex-col reveal relative overflow-hidden">
+            
             <div className="relative flex items-center justify-between">
               <span className="chapter">{flagship.eyebrow}</span>
               <span className="num">{flagship.timeline}</span>
             </div>
-            <div className="relative w-12 h-12 mt-8 rounded-full grid place-items-center bg-navy text-cream">
+            <div className="relative w-12 h-12 mt-8 rounded-full grid place-items-center bg-navy text-white">
               <ServiceIcon name={flagship.icon} width={22} height={22} />
             </div>
             <h3 className="relative font-display font-bold text-navy mt-6" style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)", lineHeight: 1.02, letterSpacing: "-0.03em" }}>
@@ -218,7 +218,7 @@ export function Process() {
                 <span className="hidden lg:grid absolute left-6 top-[8px] w-6 h-6 rounded-full bg-cream place-items-center" aria-hidden="true">
                   <span className={`w-3 h-3 rounded-full ${i === 1 ? "bg-blue node-pulse" : "bg-navy"}`} />
                 </span>
-                <div className="card p-6 h-full">
+                <div className="card card-marks p-6 h-full">
                   <div className="flex items-center justify-between">
                     <span className="chapter">{s.n}</span>
                     <span className="num">{s.when}</span>
@@ -450,7 +450,7 @@ export function PricingCards({ withHeading = true }: { withHeading?: boolean }) 
         {withHeading ? (
           <SectionHeading
             chapter="07 / Pricing"
-            icon={<IconPrice className="text-cream" />}
+            icon={<IconPrice className="text-white" />}
             title={
               <>
                 A number in writing <Em>before we build.</Em>
@@ -463,15 +463,15 @@ export function PricingCards({ withHeading = true }: { withHeading?: boolean }) 
           {PRICING.tiers.map((t, i) => {
             const priceTodo = isTodo(t.price);
             return (
-              <div key={t.name} className={`card-light bg-cream text-gray-600 rounded-2xl p-7 flex flex-col reveal reveal-delay-${i + 1} ${t.featured ? "md:-translate-y-3 ring-4 ring-blue/60" : ""}`}>
+              <div key={t.name} className={`plate card-marks p-7 flex flex-col reveal reveal-delay-${i + 1} ${t.featured ? "md:-translate-y-3 !border-yellow" : ""}`}>
                 <div className="flex items-center justify-between">
-                  <span className="chapter !text-navy">{String(i + 1).padStart(2, "0")}</span>
-                  {t.featured ? <span className="text-[10px] font-mono uppercase tracking-wide text-blue">most start here</span> : null}
+                  <span className="chapter">{String(i + 1).padStart(2, "0")}</span>
+                  {t.featured ? <span className="fig !text-yellow">most start here</span> : null}
                 </div>
                 <h3 className="h3 mt-5">{t.name}</h3>
-                <div className="price mt-5">
+                <div className="price mt-5 !text-white">
                   {priceTodo ? "Priced" : t.price}
-                  <small>/ {t.unit}</small>
+                  <small className="!text-[#9fb0e6]">/ {t.unit}</small>
                 </div>
                 <p className="mt-5 leading-relaxed">{t.body}</p>
                 <Link href={t.href} className={`btn mt-7 ${t.featured ? "btn-primary" : "btn-ghost"}`}>
@@ -481,10 +481,10 @@ export function PricingCards({ withHeading = true }: { withHeading?: boolean }) 
             );
           })}
         </div>
-        <ul className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-3 text-sm text-gray-300">
+        <ul className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-3 text-sm" style={{ color: "#c9d3f2" }}>
           {PRICING.principles.map((p) => (
             <li key={p} className="inline-flex items-start gap-2">
-              <Check width={16} height={16} className="text-blue-300 mt-0.5 flex-none" /> <span>{p}</span>
+              <Check width={16} height={16} className="text-yellow mt-0.5 flex-none" /> <span>{p}</span>
             </li>
           ))}
         </ul>
@@ -559,9 +559,10 @@ export function Faq({ items = FAQ, heading = true }: { items?: { q: string; a: s
 export function CtaBand({ title, body }: { title?: React.ReactNode; body?: string }) {
   return (
     <section className="container pb-24 pt-6">
-      <div className="relative card overflow-hidden p-10 md:p-14 reveal">
-        <span className="spot-blue absolute -left-24 -bottom-24 w-72 h-72" aria-hidden="true" />
-        <span className="strand-h absolute right-8 top-8 w-64 hidden md:block" aria-hidden="true" />
+      <div className="relative section-dark rounded-[10px] overflow-hidden p-10 md:p-14 reveal">
+        <span className="crosshair text-white left-5 top-5" aria-hidden="true" />
+        <span className="crosshair text-white right-5 bottom-5" aria-hidden="true" />
+        <span className="strand-h-light absolute right-8 top-8 w-64 hidden md:block" aria-hidden="true" />
         <div className="relative grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-center">
           <div>
             <p className="chapter mb-5">Next step</p>
@@ -581,7 +582,7 @@ export function CtaBand({ title, body }: { title?: React.ReactNode; body?: strin
             <Link href="/pricing" className="btn btn-ghost">
               How pricing works
             </Link>
-            <span className="text-xs text-gray-500 mt-1">{SITE.responseTime}. {SITE.hours}.</span>
+            <span className="fig mt-1">{SITE.responseTime}. {SITE.hours}.</span>
           </div>
         </div>
       </div>

@@ -32,10 +32,10 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.1fr_2fr]">
           <div>
             <Image src="/brand/helix-horizontal-reverse.svg" alt={SITE.name} width={200} height={78} loading="eager" />
-            <p className="mt-6 text-gray-300 leading-relaxed max-w-sm">
+            <p className="mt-6 text-[#c9d3f2] leading-relaxed max-w-sm">
               AI agents for lab, medical, and industrial supply companies. Built in Fredericksburg, Virginia. Owned by the client, always.
             </p>
-            <div className="mt-6 flex flex-col gap-1.5 text-sm text-gray-300">
+            <div className="mt-6 flex flex-col gap-1.5 text-sm text-[#c9d3f2]">
               <a href={`mailto:${SITE.email}`} className="hover:text-white underline-slide w-fit">{SITE.email}</a>
               {!isTodo(SITE.phone) ? (
                 <a href={`tel:${SITE.phone}`} className="hover:text-white underline-slide w-fit">{SITE.phoneDisplay}</a>
@@ -60,7 +60,7 @@ export default function Footer() {
                 <ul className="space-y-2.5">
                   {c.links.map((l) => (
                     <li key={l.href + l.label}>
-                      <Link href={l.href} className="text-sm text-gray-300 hover:text-white underline-slide">
+                      <Link href={l.href} className="text-sm text-[#c9d3f2] hover:text-white underline-slide">
                         {l.label}
                       </Link>
                     </li>
@@ -73,7 +73,7 @@ export default function Footer() {
 
         <span className="strand-h-light block mt-16" aria-hidden="true" />
 
-        <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-between text-xs text-gray-300">
+        <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-between text-xs text-[#c9d3f2]">
           <span>© {year} {SITE.name}. Fredericksburg, VA.</span>
           <span>Built with AI. Owned by you.</span>
         </div>
