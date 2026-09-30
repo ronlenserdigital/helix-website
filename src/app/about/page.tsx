@@ -5,8 +5,8 @@ import { Em, Founders, SectionHeading, CtaBand } from "@/components/sections";
 import { BreadcrumbJsonLd } from "@/components/json-ld";
 
 export const metadata: Metadata = {
-  title: "The Helix team: four builders, no account managers",
-  description: "Helix Research Technologies is three founders and a small team in Fredericksburg, VA who build AI agents for supply companies and answer their own phones.",
+  title: "The Helix team: four founders, no account managers",
+  description: "Helix Research Technologies is four founders in Fredericksburg, VA who build AI agents for supply companies and answer their own phones.",
   alternates: { canonical: "/about" },
 };
 
@@ -23,7 +23,7 @@ export default function AboutPage() {
         eyebrow={`${SITE.city} · founded ${SITE.foundingYear}`}
         title={
           <>
-            Four people. <Em>No account managers.</Em>
+            Four founders. <Em>No account managers.</Em>
           </>
         }
         lead="The person on your first call builds your system and picks up when it breaks. We started Helix in Fredericksburg because supply companies around us were losing orders to slow replies, and the agencies pitching them AI could not ship anything that touched a real catalog."

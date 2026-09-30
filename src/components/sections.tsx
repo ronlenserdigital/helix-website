@@ -279,7 +279,7 @@ export function Founders({ full = false }: { full?: boolean }) {
             chapter="Who you get"
             title={
               <>
-                Four people. <Em>No account managers.</Em>
+                Four founders. <Em>No account managers.</Em>
               </>
             }
             lead="The person on your first call builds the system and picks up when something breaks. We are in Fredericksburg, Virginia, and we answer our own phones."
