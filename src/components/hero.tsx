@@ -1,5 +1,5 @@
 import Link from "next/link";
-import HelixCanvas from "./helix-canvas";
+import QuoteDeskDemo from "./quote-desk-demo";
 import LeadForm from "./lead-form";
 import { Bolt, Sparkles, Arc, Dot, Doodle } from "./doodles";
 
@@ -48,28 +48,8 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="container relative grid gap-8 lg:grid-cols-[1fr_1fr] items-stretch pb-16 md:pb-24">
-        <div className="frame relative overflow-hidden h-[420px] lg:h-auto lg:min-h-[520px] reveal">
-          <div className="frame-bar">
-            <i /> <i /> <i />
-            <span className="ml-auto num">quote-desk-agent / live</span>
-          </div>
-          <div className="absolute inset-x-0 top-[42px] bottom-0">
-            <HelixCanvas />
-            <div className="absolute left-5 bottom-5 right-5 grid grid-cols-3 gap-3 text-left">
-              {[
-                ["4:47pm", "request in"],
-                ["4:49pm", "quote sent"],
-                ["+1 day", "follow-up"],
-              ].map(([t, l]) => (
-                <div key={t} className="card-cream p-3">
-                  <div className="font-display font-bold text-navy text-lg leading-none">{t}</div>
-                  <div className="text-xs text-gray-600 mt-1">{l}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+      <div className="container relative grid gap-8 lg:grid-cols-[1fr_1fr] items-start pb-16 md:pb-24">
+        <QuoteDeskDemo />
         <div className="reveal reveal-delay-1">
           <LeadForm variant="hero" />
         </div>
