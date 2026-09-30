@@ -3,7 +3,7 @@ import { Inter, Inter_Tight } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
-import { SITE } from "@/lib/data";
+import { SITE, asset } from "@/lib/data";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import StickyCta from "@/components/sticky-cta";
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description: SITE.description,
   },
   icons: {
-    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    icon: [{ url: asset("/icon.svg"), type: "image/svg+xml" }],
   },
 };
 
@@ -68,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <StickyCta />
         <RevealObserver />
-        <Analytics />
+        {process.env.NEXT_PUBLIC_STATIC_EXPORT === "1" ? null : <Analytics />}
       </body>
     </html>
   );

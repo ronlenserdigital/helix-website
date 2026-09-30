@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { X } from "./icons";
+import { asset } from "@/lib/data";
 
 const NAV = [
   { href: "/services", label: "What we build" },
@@ -40,7 +41,7 @@ export default function Header() {
     >
       <div className="container flex h-[72px] items-center justify-between gap-6">
         <Link href="/" className="flex items-center" aria-label="Helix Research Technologies home">
-          <Image src="/brand/helix-horizontal.svg" alt="Helix Research Technologies" width={148} height={58} priority className="h-8 w-auto" />
+          <Image src={asset("/brand/helix-horizontal.svg")} alt="Helix Research Technologies" width={148} height={58} priority className="h-8 w-auto" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8 text-[0.92rem] font-medium text-gray-600" aria-label="Primary">

@@ -35,6 +35,16 @@ export default function LeadForm({ variant = "hero", title }: Props) {
       hp: String(fd.get("hp_field") || ""),
       page: typeof window !== "undefined" ? window.location.pathname : "",
     };
+    if (process.env.NEXT_PUBLIC_STATIC_EXPORT === "1") {
+      // Static preview (GitHub Pages): no server, so hand the details to email.
+      const body = Object.entries(payload)
+        .filter(([k]) => k !== "hp")
+        .map(([k, v]) => `${k}: ${v}`)
+        .join("\n");
+      window.location.href = `mailto:hello@helixresearchtech.com?subject=${encodeURIComponent("Quote request from " + payload.company)}&body=${encodeURIComponent(body)}`;
+      setState("idle");
+      return;
+    }
     try {
       const res = await fetch("/api/lead", {
         method: "POST",

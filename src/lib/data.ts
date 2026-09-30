@@ -47,6 +47,12 @@ export function getComparePage(slug: string): ComparePage | undefined {
   return compare.pages.find((p) => p.slug === slug);
 }
 
+/** Prefix for static assets; empty on Vercel, "/repo-name" on GitHub Pages. */
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+export function asset(path: string): string {
+  return `${BASE_PATH}${path}`;
+}
+
 export function absoluteUrl(path = "/"): string {
   const base = site.url.replace(/\/$/, "");
   return `${base}${path.startsWith("/") ? path : `/${path}`}`;

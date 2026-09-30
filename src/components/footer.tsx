@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SITE, SERVICES, INDUSTRIES, COMPARE, isTodo } from "@/lib/data";
+import { SITE, SERVICES, INDUSTRIES, COMPARE, isTodo, asset } from "@/lib/data";
 import { Linkedin } from "./icons";
 
 export default function Footer() {
@@ -30,7 +30,7 @@ export default function Footer() {
       <div className="container relative pt-20 pb-10">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_2fr]">
           <div>
-            <Image src="/brand/helix-horizontal-reverse.svg" alt={SITE.name} width={200} height={78} loading="eager" />
+            <Image src={asset("/brand/helix-horizontal-reverse.svg")} alt={SITE.name} width={200} height={78} loading="eager" />
             <p className="mt-6 text-[#b8bcc6] leading-relaxed max-w-sm">
               AI agents for lab, medical, and industrial supply companies. Built in Fredericksburg, Virginia. Owned by the client, always.
             </p>

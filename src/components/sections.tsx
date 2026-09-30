@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SITE, SERVICES, CASES, FOUNDERS, BADGES, FAQ, PRICING, COMPARE, isTodo } from "@/lib/data";
+import { SITE, SERVICES, CASES, FOUNDERS, BADGES, FAQ, PRICING, COMPARE, isTodo, asset } from "@/lib/data";
 import { ArrowRight, ArrowUpRight, Check, Minus, X, ServiceIcon, Linkedin } from "./icons";
 import LeadForm from "./lead-form";
 
@@ -298,7 +298,7 @@ export function Founders({ full = false }: { full?: boolean }) {
                       <span className="absolute bottom-3 fig">Photo coming</span>
                     </div>
                   ) : (
-                    <Image src={f.photo} alt={`${f.name}, ${f.role}`} fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
+                    <Image src={asset(f.photo)} alt={`${f.name}, ${f.role}`} fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
                   )}
                 </div>
                 <div className="mt-5 flex items-center justify-between gap-2">

@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 
+export const dynamic = "force-static";
 export const alt = "Helix Research Technologies: AI agents for lab and medical supply companies";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

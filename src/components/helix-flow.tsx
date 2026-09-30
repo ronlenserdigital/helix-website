@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { asset } from "@/lib/data";
 
 /**
  * The Helix flow: request -> agent -> quote. Three quiet cards, one thin connector.
@@ -44,7 +45,7 @@ export default function HelixFlow({ dark = false }: { dark?: boolean }) {
             <div className="mt-5 flex items-start gap-3">
               {i === 1 ? (
                 <span className={`relative flex-none w-9 h-9 rounded-full grid place-items-center ${dark ? "bg-white" : "bg-navy"}`}>
-                  <Image src={dark ? "/brand/helix-symbol.svg" : "/brand/helix-symbol-reverse.svg"} alt="" width={16} height={16} />
+                  <Image src={asset(dark ? "/brand/helix-symbol.svg" : "/brand/helix-symbol-reverse.svg")} alt="" width={16} height={16} />
                 </span>
               ) : (
                 <span className={`flex-none w-9 h-9 rounded-full grid place-items-center ${dark ? "bg-white/10" : "bg-gray-100"}`}>

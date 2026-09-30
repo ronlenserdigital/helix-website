@@ -56,6 +56,10 @@ Blueprint-era classes (`.strand-*`, `.rungs*`, `.orbit`, `.crosshair`, `.dim`, `
 
 Photos: real founder photos go in `public/founders/` as `ron.jpg`, `martin.jpg`, `constantine.jpg`, `thomas.jpg`; update `photo` paths in `src/data/founders.json`. Until then the cards show initials.
 
+## GitHub Pages preview
+
+`.github/workflows/pages.yml` publishes a static preview on every push to `main` at `https://<owner>.github.io/helix-website/`. One-time setup: repo Settings > Pages > Source: GitHub Actions. Preview limits: the lead form falls back to email (no server for `/api/lead`), robots is set to noindex, no Vercel analytics. Production stays on Vercel.
+
 ## Edit map (copy lives in data, not components)
 
 | Change | File |

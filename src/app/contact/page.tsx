@@ -5,6 +5,7 @@ import LeadForm from "@/components/lead-form";
 import { Em } from "@/components/sections";
 import { BreadcrumbJsonLd } from "@/components/json-ld";
 import { Check, Mail, Phone } from "@/components/icons";
+import SentSwitch from "@/components/contact-sent";
 
 export const metadata: Metadata = {
   title: "Book a free 30 minute call",
@@ -14,28 +15,35 @@ export const metadata: Metadata = {
 
 const CAL = process.env.NEXT_PUBLIC_GHL_CALENDAR_URL;
 
-export default async function ContactPage(props: PageProps<"/contact">) {
-  const sp = await props.searchParams;
-  const sent = sp?.sent === "1";
+export default function ContactPage() {
+  const heroSent = (
+    <PageHero
+      eyebrow="Book a call"
+      title={
+        <>
+          Got it. <Em>Pick a time.</Em>
+        </>
+      }
+      lead="Your details are in. Grab a slot below and we will come to the call with your site audit done."
+      cta={false}
+    />
+  );
+  const heroDefault = (
+    <PageHero
+      eyebrow="Book a call"
+      title={
+        <>
+          Thirty minutes. <Em>No pitch deck.</Em>
+        </>
+      }
+      lead={SITE.calendarNote}
+      cta={false}
+    />
+  );
 
   return (
     <>
-      <PageHero
-        eyebrow="Book a call"
-        title={
-          sent ? (
-            <>
-              Got it. <Em>Pick a time.</Em>
-            </>
-          ) : (
-            <>
-              Thirty minutes. <Em>No pitch deck.</Em>
-            </>
-          )
-        }
-        lead={sent ? "Your details are in. Grab a slot below and we will come to the call with your site audit done." : SITE.calendarNote}
-        cta={false}
-      />
+      <SentSwitch sent={heroSent} notSent={heroDefault} />
 
       <section className="section pt-0" id="book">
         <div className="container grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-start">
@@ -60,7 +68,7 @@ export default async function ContactPage(props: PageProps<"/contact">) {
           </div>
 
           <div className="space-y-4">
-            {!sent ? <LeadForm variant="page" title="Or send the details first" /> : null}
+            <SentSwitch sent={null} notSent={<LeadForm variant="page" title="Or send the details first" />} />
             <div className="glass p-7 reveal">
               <p className="eyebrow mb-4">On the call</p>
               <ul className="space-y-2.5 text-gray-600">
