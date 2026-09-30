@@ -9,7 +9,9 @@ export const runtime = "nodejs";
  *      in the Marketing Pipeline (GHL_API_KEY, GHL_LOCATION_ID, GHL_PIPELINE_ID).
  *      The Helix Discord bot polls GHL every minute, so the contact and the deal
  *      also show up in new-leads and the deals forum on their own.
- *   2. Discord: instant post with the full form (DISCORD_LEAD_WEBHOOK_URL).
+ *   2. Discord: instant post with the full form. Posts as the "Helix Website" bot user
+ *      when DISCORD_BOT_TOKEN + DISCORD_LEAD_CHANNEL_ID are set (bot profile carries
+ *      avatar, banner and bio), otherwise through DISCORD_LEAD_WEBHOOK_URL.
  *   3. Email copy via Resend (RESEND_API_KEY, LEAD_NOTIFY_EMAIL).
  *   4. Always logs to the server console.
  * CORS: origins in ALLOWED_ORIGINS (comma separated) may call this from another
@@ -196,8 +198,11 @@ async function pushToGhl(lead: Lead): Promise<{ ok: boolean; id?: string; opport
 /* ---------- Discord ---------- */
 
 async function postToDiscord(lead: Lead, ghl: { id?: string; opportunityId?: string }, siteOrigin: string): Promise<void> {
-  const url = process.env.DISCORD_LEAD_WEBHOOK_URL;
-  if (!url) return;
+  const webhook = process.env.DISCORD_LEAD_WEBHOOK_URL;
+  const botToken = process.env.DISCORD_BOT_TOKEN;
+  const channelId = process.env.DISCORD_LEAD_CHANNEL_ID;
+  const viaBot = !!(botToken && channelId);
+  if (!webhook && !viaBot) return;
   const locationId = process.env.GHL_LOCATION_ID;
   const contactUrl = ghl.id && locationId ? `https://app.gohighlevel.com/v2/location/${locationId}/contacts/detail/${ghl.id}` : undefined;
   const oppUrl = ghl.opportunityId && locationId ? `https://app.gohighlevel.com/v2/location/${locationId}/opportunities/list` : undefined;
@@ -210,14 +215,10 @@ async function postToDiscord(lead: Lead, ghl: { id?: string; opportunityId?: str
     site ? `[Their website](${site})` : "",
     `[Reply by email](mailto:${lead.email})`,
   ].filter(Boolean).join("  ·  ");
-  await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      username: "Helix Website",
-      avatar_url: `${brand}/avatar.png`,
-      allowed_mentions: { parse: [] },
-      embeds: [
+  const payload = {
+    ...(viaBot ? {} : { username: "Helix Website", avatar_url: `${brand}/avatar.png` }),
+    allowed_mentions: { parse: [] },
+    embeds: [
         {
           author: { name: "helixresearchtech.com  ·  new lead", icon_url: `${brand}/avatar.png`, url: siteOrigin },
           title: `${lead.company}${lead.need ? `  ·  ${lead.need}` : ""}`.slice(0, 256),
@@ -239,8 +240,12 @@ async function postToDiscord(lead: Lead, ghl: { id?: string; opportunityId?: str
           timestamp: new Date().toISOString(),
         },
       ],
-    }),
-  }).catch(() => undefined);
+  };
+  // Bot user (has its own profile with banner and bio) when configured, webhook otherwise.
+  const target = viaBot ? `https://discord.com/api/v10/channels/${channelId}/messages` : (webhook as string);
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  if (viaBot) headers.Authorization = `Bot ${botToken}`;
+  await fetch(target, { method: "POST", headers, body: JSON.stringify(payload) }).catch(() => undefined);
 }
 
 /* ---------- Email ---------- */
