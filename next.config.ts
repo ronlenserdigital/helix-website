@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
   env: {
     NEXT_PUBLIC_STATIC_EXPORT: isStatic ? "1" : "",
     NEXT_PUBLIC_BASE_PATH: basePath,
+    NEXT_PUBLIC_LEAD_ENDPOINT: process.env.LEAD_ENDPOINT || "",
   },
 };
 

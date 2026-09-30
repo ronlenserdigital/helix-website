@@ -38,6 +38,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [{ url: asset("/icon.svg"), type: "image/svg+xml" }],
   },
+  ...(process.env.NEXT_PUBLIC_GSC_VERIFICATION ? { verification: { google: process.env.NEXT_PUBLIC_GSC_VERIFICATION } } : {}),
 };
 
 export const viewport: Viewport = {

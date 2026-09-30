@@ -35,8 +35,9 @@ export default function LeadForm({ variant = "hero", title }: Props) {
       hp: String(fd.get("hp_field") || ""),
       page: typeof window !== "undefined" ? window.location.pathname : "",
     };
-    if (process.env.NEXT_PUBLIC_STATIC_EXPORT === "1") {
-      // Static preview (GitHub Pages): no server, so hand the details to email.
+    const endpoint = process.env.NEXT_PUBLIC_LEAD_ENDPOINT || "/api/lead";
+    if (process.env.NEXT_PUBLIC_STATIC_EXPORT === "1" && !process.env.NEXT_PUBLIC_LEAD_ENDPOINT) {
+      // Static preview with no API configured: hand the details to email.
       const body = Object.entries(payload)
         .filter(([k]) => k !== "hp")
         .map(([k, v]) => `${k}: ${v}`)
@@ -46,7 +47,7 @@ export default function LeadForm({ variant = "hero", title }: Props) {
       return;
     }
     try {
-      const res = await fetch("/api/lead", {
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(payload),
