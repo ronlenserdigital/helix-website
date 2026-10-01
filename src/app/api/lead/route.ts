@@ -311,6 +311,14 @@ export async function POST(req: Request) {
     return json({ ok: false, error: "Name, work email, and company are required" }, 400);
   }
 
+  // Nowhere to deliver the lead (fresh deployment with no env vars): fail loudly so the
+  // form shows the email fallback instead of swallowing the lead.
+  const hasSink = !!(process.env.GHL_API_KEY || process.env.DISCORD_LEAD_WEBHOOK_URL || process.env.DISCORD_BOT_TOKEN || process.env.RESEND_API_KEY);
+  if (!hasSink) {
+    console.error(JSON.stringify({ event: "lead_unrouted", lead: { ...lead, message: lead.message?.slice(0, 200) } }));
+    return json({ ok: false, error: "Our form is not connected yet" }, 503);
+  }
+
   const ghl = await pushToGhl(lead).catch((e: Error) => ({ ok: false, error: e.message } as { ok: boolean; id?: string; opportunityId?: string; error?: string }));
   const siteOrigin = process.env.NEXT_PUBLIC_SITE_ORIGIN || new URL(req.url).origin;
   await Promise.all([postToDiscord(lead, ghl, siteOrigin), emailCopy(lead)]);
