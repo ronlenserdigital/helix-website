@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { SITE, isTodo } from "@/lib/data";
 import PageHero from "@/components/page-hero";
 import LeadForm from "@/components/lead-form";
@@ -13,7 +14,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
-const CAL = process.env.NEXT_PUBLIC_GHL_CALENDAR_URL;
+// GHL booking link: env var wins, else site.json calendarUrl (so it can be set without touching Vercel).
+const CAL = (process.env.NEXT_PUBLIC_GHL_CALENDAR_URL || SITE.calendarUrl || "").trim();
 
 export default function ContactPage() {
   const heroSent = (
@@ -49,19 +51,34 @@ export default function ContactPage() {
         <div className="container grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-start">
           <div className="glass p-3 sm:p-4 reveal min-h-[560px]">
             {CAL ? (
-              <iframe
-                src={CAL}
-                title="Book a call with Helix"
-                className="w-full h-[760px] rounded-2xl bg-transparent"
-                loading="lazy"
-              />
+              <>
+                {/* GHL's embed script sizes the iframe to the calendar, so nothing gets cut off on mobile. */}
+                <iframe
+                  id="helix-booking"
+                  src={CAL}
+                  title="Book a call with Helix"
+                  className="w-full min-h-[760px] rounded-2xl bg-transparent border-0 overflow-hidden"
+                  scrolling="no"
+                />
+                <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="afterInteractive" />
+                <p className="text-sm text-gray-500 text-center mt-3">
+                  Calendar not loading?{" "}
+                  <a href={CAL} target="_blank" rel="noopener" className="text-navy underline">
+                    Open it in a new tab
+                  </a>
+                  .
+                </p>
+              </>
             ) : (
-              <div className="h-full min-h-[520px] rounded-2xl border border-dashed border-gray-300 grid place-items-center text-center p-8">
+              <div className="h-full min-h-[520px] rounded-2xl border border-gray-200 grid place-items-center text-center p-8">
                 <div>
-                  <p className="eyebrow mb-3">Calendar</p>
+                  <p className="eyebrow mb-3">Pick a time</p>
                   <p className="text-gray-600 max-w-sm">
-                    Booking calendar loads here once <span className="mono text-navy">NEXT_PUBLIC_GHL_CALENDAR_URL</span> is set. Until then, use the form or email a founder.
+                    Send the short form and a founder emails you times within one business day, or email us directly.
                   </p>
+                  <a href={`mailto:${SITE.email}?subject=${encodeURIComponent("Book a 30 minute call")}`} className="btn btn-primary mt-5">
+                    Email a founder
+                  </a>
                 </div>
               </div>
             )}
